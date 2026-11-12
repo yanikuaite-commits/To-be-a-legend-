@@ -4,14 +4,23 @@
 
 `To-be-a-legend-` — jogo de carreira de futebol, em duas implementações no mesmo repo:
 
-- **Web** (`src/`) — React 18 + TypeScript + Vite. É o jogo principal.
-- **Godot** (`godot/`) — port em Godot 4.3 (GDScript), desktop e browser.
+- **Web** (`src/`) — React 18 + TypeScript + Vite. É o jogo principal (~12k linhas).
+- **Godot** (`godot/`) — port em Godot 4.3 (GDScript), desktop e browser. É uma
+  reimplementação **parcial** (~4k linhas): só tem liga, tabela, calendário,
+  atributos, treino e notícias. Faltam taça, continental, seleção, mundial,
+  transferências, conquistas, evolução, contrato e histórico.
+
+O APK Android **não** vem do Godot: empacota o jogo React com Capacitor (ver
+`android/`), para que o telemóvel tenha o jogo completo. O Godot só é publicado
+como build de browser e Linux.
 
 ## Comandos
 
 ```bash
 npm ci            # o package-lock.json está versionado; usa sempre npm ci
 npm run build     # tsc -b && vite build -> dist/
+
+npm run android:sync   # build web + cap sync android (copia dist/ para o projeto nativo)
 
 godot --path godot --import          # importar recursos
 godot --headless --path godot "res://tests/CareerTest.tscn"   # correr um teste
@@ -58,21 +67,46 @@ Três coisas que só se descobrem a perder tempo com elas:
 O preset Android compila só arm64-v8a para manter o APK nos ~27 MB; ativar
 `x86_64` duplica o tamanho e só serve para emuladores.
 
-### Telemóvel
+## Android (Capacitor)
 
-- Android nativo: preset `Android` → `.apk` (debug e release, ambos assinados).
-- iOS: não há export nativo em Linux (exige macOS + Xcode). O caminho é PWA.
-- PWA: o preset `Web` tem `progressive_web_app/enabled=true` e o jogo web tem
-  `public/manifest.webmanifest` + `public/sw.js` (o service worker só é
-  registado em produção, ver `src/main.tsx`).
+O APK é gerado a partir do jogo React, não do Godot:
+
+```bash
+npm run build
+npx cap sync android          # copia dist/ -> android/app/src/main/assets/public
+cd android && ./gradlew assembleRelease    # -> app/build/outputs/apk/release/app-release.apk
+```
+
+- `capacitor.config.json` define `appId com.tobealegend.game` e `webDir dist`.
+- `android/app/build.gradle` lê `TBAL_VERSION_NAME` e `TBAL_VERSION_CODE` do
+  ambiente (o CI deriva-os da tag: `v1.2.3` → versionCode 10203), para que uma
+  versão nova instale por cima da anterior.
+- Assinatura: `TBAL_KEYSTORE`, `TBAL_KEYSTORE_PASSWORD`, `TBAL_KEY_ALIAS`,
+  `TBAL_KEY_PASSWORD`. Sem estas variáveis o Gradle produz
+  `app-release-unsigned.apk` — não `app-release.apk` — e a verificação falha.
+- Ícones e splash vivem em `android/app/src/main/res/`, gerados a partir da arte
+  do jogo; não são os genéricos do Capacitor.
+- O service worker é desativado no shell nativo (ver `src/main.tsx`): os assets
+  já vêm locais e o cache-first só arriscava prender ficheiros desatualizados.
+- iOS não tem export nativo em Linux (exige macOS + Xcode); o caminho é PWA.
+
+### PWA (web)
+
+O jogo web tem `public/manifest.webmanifest` + `public/sw.js`. O service worker
+só é registado em produção e fora do shell nativo (`src/main.tsx`). O port Godot
+tem `progressive_web_app/enabled=true` no preset `Web`.
 
 ## CI e releases
 
 - `.github/workflows/ci.yml` — push para `main` e pull requests: build web, import
-  e testes Godot, e APK Android de debug (com verificação de assinatura).
+  e testes Godot, e APK Android de debug do Capacitor (com verificação de assinatura).
 - `.github/workflows/release.yml` — tag `v*` ou dispatch manual: `verify` → `package` → `publish`.
   Publica quatro artefactos: jogo web (PWA), port Godot para browser (PWA), port
-  Godot para Linux x86_64 e APK Android.
+  Godot para Linux x86_64 e o APK Android do Capacitor (jogo React completo).
+
+Nos passos de workflow, valores escritos em `$GITHUB_ENV` só ficam disponíveis no
+passo **seguinte**. Referenciá-los dentro do mesmo passo devolve vazio — foi assim
+que o APK saiu sem assinatura. Resolver em variáveis locais primeiro.
 
 Para publicar: `git tag vX.Y.Z && git push origin vX.Y.Z`.
 
