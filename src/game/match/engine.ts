@@ -143,6 +143,7 @@ export class MatchEngine {
   viewport = { w: 900, h: 600 };
   sprites: Map<number, HTMLCanvasElement> = new Map();
   spriteRigs: Map<number, CharacterRig> = new Map();
+  animationFrames: Map<string, HTMLCanvasElement[]> = new Map();
   ballImage: HTMLImageElement | null = null;
   paused = false;
   feedback = "";
@@ -1822,6 +1823,10 @@ export class MatchEngine {
 
   setSpriteRigs(rigs: Map<number, CharacterRig>): void {
     this.spriteRigs = rigs;
+  }
+
+  setAnimationFrames(frames: Map<string, HTMLCanvasElement[]>): void {
+    this.animationFrames = frames;
   }
 
   getPlayerWorldHeight(): number {

@@ -242,14 +242,22 @@ export function PlayerCreator({
             <h3><Sparkles size={16} /> Aparência</h3>
             <div className="form-field full" style={{ marginBottom: 12 }}>
               <label>Rosto base (13 personagens disponíveis)</label>
-              <div className="option-grid" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(76px, 1fr))" }}>
+              <div className="option-grid" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(88px, 1fr))" }}>
                 {BASE_FACES.map((face) => (
                   <button
                     key={face.id}
                     type="button"
-                    className={`option-chip ${appearance.baseId === face.id ? "active" : ""}`}
+                    className={`option-chip face-option ${appearance.baseId === face.id ? "active" : ""}`}
                     onClick={() => set("baseId", face.id)}
+                    aria-label={`${face.label}, selecionar rosto base`}
+                    aria-pressed={appearance.baseId === face.id}
                   >
+                    <img
+                      src={`/assets/characters/base/${face.id}.png`}
+                      alt=""
+                      loading="lazy"
+                      draggable={false}
+                    />
                     {face.label}
                   </button>
                 ))}

@@ -3,6 +3,7 @@ import { ArrowLeft, CircleStop, Footprints, Pause, Play, RotateCcw, Shield, Spar
 import { MatchEngine } from "../game/match/engine";
 import { renderMatch } from "../game/match/renderer";
 import { buildMatchSetup } from "../game/match/setup";
+import { loadMatchAnimations } from "../game/match/animation-assets";
 import type { MatchReport } from "../game/match/types";
 import { composeCharacter, composeCharacterSyncFallback, getCharacterRig } from "../game/characters/assets";
 import { haptic, sfxGoal, sfxKick, sfxWhistle } from "../game/audio";
@@ -38,6 +39,7 @@ export function MatchScreen({
   const [paused, setPaused] = useState(false);
   const [finishedReport, setFinishedReport] = useState<MatchReport | null>(null);
   const [feedback, setFeedback] = useState("");
+  const [animationWarning, setAnimationWarning] = useState(false);
 
   // Preload every layered sprite plus the ball before kickoff.
   useEffect(() => {
@@ -48,6 +50,7 @@ export function MatchScreen({
     setProgress(0);
     setFinishedReport(null);
     setPaused(false);
+    setAnimationWarning(false);
     engine.setPaused(false);
 
     const ball = new Image();
@@ -57,28 +60,42 @@ export function MatchScreen({
       ball.src = "/assets/props/ball.png";
     });
 
+    const animationPromise = loadMatchAnimations()
+      .then((frames) => ({ ok: true as const, frames }))
+      .catch((error: unknown) => ({ ok: false as const, error }));
+
     async function preload() {
       let done = 0;
       const total = engine.players.length;
-      const entries = await Promise.all(
-        engine.players.map(async (player) => {
-          let canvas: HTMLCanvasElement;
-          const rigPromise = getCharacterRig(player.appearance.baseId);
-          try {
-            canvas = await composeCharacter(player.appearance, player.kit, player.number);
-          } catch {
-            canvas = composeCharacterSyncFallback(player.appearance);
-          }
-          const rig = await rigPromise;
-          done += 1;
-          if (!cancelled) setProgress(done / total);
-          return { id: player.id, canvas, rig };
-        }),
-      );
-      const image = await ballReady;
+      const [entries, image, animations] = await Promise.all([
+        Promise.all(
+          engine.players.map(async (player) => {
+            let canvas: HTMLCanvasElement;
+            const rigPromise = getCharacterRig(player.appearance.baseId);
+            try {
+              canvas = await composeCharacter(player.appearance, player.kit, player.number);
+            } catch {
+              canvas = composeCharacterSyncFallback(player.appearance);
+            }
+            const rig = await rigPromise;
+            done += 1;
+            if (!cancelled) setProgress(done / total);
+            return { id: player.id, canvas, rig };
+          }),
+        ),
+        ballReady,
+        animationPromise,
+      ]);
       if (cancelled) return;
       engine.setSpriteMap(new Map(entries.map((entry) => [entry.id, entry.canvas])));
       engine.setSpriteRigs(new Map(entries.map((entry) => [entry.id, entry.rig])));
+      if (!animations.ok) {
+        console.error("As animações da partida não puderam ser carregadas.", animations.error);
+        setAnimationWarning(true);
+        engine.setAnimationFrames(new Map());
+      } else {
+        engine.setAnimationFrames(animations.frames);
+      }
       engine.setBallImage(image);
       engine.start();
       readyRef.current = true;
@@ -284,7 +301,9 @@ export function MatchScreen({
           </div>
         </div>
 
-        <div className="match-ticker">{feedback || hud.eventText}</div>
+        <div className="match-ticker">
+          {animationWarning ? "Animações indisponíveis; a usar os sprites personalizados." : feedback || hud.eventText}
+        </div>
 
         <div className="match-spacer" />
 

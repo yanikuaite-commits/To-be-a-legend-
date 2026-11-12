@@ -322,6 +322,121 @@ function drawSpriteSlice(
   ctx.restore();
 }
 
+function animationForPlayer(
+  engine: MatchEngine,
+  p: MatchPlayer,
+  speed: number,
+  screenX: number,
+  screenY: number,
+  phase: number,
+): { frame: HTMLCanvasElement; mirrorX: boolean } | null {
+  if (p.slideTimer > 0) return null;
+  const mode = speed > 3.2 ? "run" : "walk";
+  let sequence: string;
+  const mirrorX = false;
+
+  if (Math.abs(screenY) > Math.abs(screenX) * 1.6) {
+    if (screenY > 0) {
+      sequence = `${mode}_front`;
+    } else {
+      sequence = mode === "run" ? `run_back_${(p.id % 2) + 1}` : "walk_back";
+    }
+  } else if (Math.abs(screenX) > Math.abs(screenY) * 1.6) {
+    sequence = `${mode}_side_${screenX > 0 ? "right" : "left"}`;
+  } else {
+    sequence = `${mode}_diagonal_${screenX > 0 ? "right" : "left"}`;
+  }
+
+  const frames = engine.animationFrames.get(sequence);
+  if (!frames?.length) return null;
+  const progress = speed > 0.5
+    ? ((phase % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2) / (Math.PI * 2)
+    : 0;
+  const frameIndex = Math.min(frames.length - 1, Math.floor(progress * frames.length));
+  return { frame: frames[frameIndex], mirrorX };
+}
+
+function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer): void {
+  const jersey = () => {
+    ctx.beginPath();
+    ctx.moveTo(91, 183);
+    ctx.lineTo(165, 183);
+    ctx.lineTo(181, 195);
+    ctx.lineTo(199, 219);
+    ctx.lineTo(184, 239);
+    ctx.lineTo(173, 228);
+    ctx.lineTo(174, 302);
+    ctx.lineTo(164, 313);
+    ctx.lineTo(92, 313);
+    ctx.lineTo(82, 302);
+    ctx.lineTo(83, 228);
+    ctx.lineTo(72, 239);
+    ctx.lineTo(57, 219);
+    ctx.lineTo(75, 195);
+    ctx.closePath();
+  };
+
+  ctx.save();
+  ctx.globalCompositeOperation = "source-atop";
+  ctx.fillStyle = p.kit.primary;
+  jersey();
+  ctx.fill();
+
+  ctx.save();
+  jersey();
+  ctx.clip();
+  ctx.fillStyle = p.kit.secondary;
+  if (p.kit.pattern === "stripes") {
+    for (let x = 70; x < 190; x += 28) ctx.fillRect(x, 180, 13, 140);
+  } else if (p.kit.pattern === "hoops") {
+    for (let y = 196; y < 313; y += 30) ctx.fillRect(55, y, 150, 13);
+  } else if (p.kit.pattern === "halves") {
+    ctx.fillRect(128, 180, 90, 145);
+  } else if (p.kit.pattern === "sash") {
+    ctx.strokeStyle = p.kit.secondary;
+    ctx.lineWidth = 22;
+    ctx.beginPath();
+    ctx.moveTo(65, 310);
+    ctx.lineTo(188, 184);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  ctx.fillStyle = p.kit.trim;
+  ctx.beginPath();
+  ctx.moveTo(111, 183);
+  ctx.lineTo(128, 207);
+  ctx.lineTo(145, 183);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(84, 297);
+  ctx.lineTo(173, 297);
+  ctx.lineTo(183, 376);
+  ctx.lineTo(160, 386);
+  ctx.lineTo(132, 378);
+  ctx.lineTo(103, 386);
+  ctx.lineTo(77, 376);
+  ctx.closePath();
+  ctx.fillStyle = p.kit.shorts;
+  ctx.fill();
+  ctx.fillStyle = p.kit.trim;
+  ctx.fillRect(126, 300, 5, 78);
+
+  ctx.save();
+  ctx.font = '900 29px "Arial Black", Impact, sans-serif';
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "rgba(2,8,20,0.65)";
+  ctx.strokeText(String(p.number), 128, 259);
+  ctx.fillStyle = p.kit.number;
+  ctx.fillText(String(p.number), 128, 259);
+  ctx.restore();
+  ctx.restore();
+}
+
 function drawPlayer(
   ctx: CanvasRenderingContext2D,
   engine: MatchEngine,
@@ -361,6 +476,8 @@ function drawPlayer(
     : 0;
   const screenFacing = p.fx * Math.cos(cam.rot) - p.fy * Math.sin(cam.rot);
   const flip = screenFacing < -0.15 ? -1 : screenFacing > 0.15 ? 1 : 1;
+  const screenFacingY = p.fx * Math.sin(cam.rot) + p.fy * Math.cos(cam.rot);
+  const animated = animationForPlayer(engine, p, speed, screenFacing, screenFacingY, phase);
 
   // Shadow.
   ctx.save();
@@ -371,7 +488,17 @@ function drawPlayer(
   ctx.fill();
   ctx.restore();
 
-  if (sprite && rig && p.slideTimer <= 0) {
+  if (animated) {
+    const displayWidth = w;
+    ctx.save();
+    ctx.translate(screen.x, screen.y + bob);
+    ctx.scale(animated.mirrorX ? -1 : 1, 1);
+    ctx.translate(-displayWidth / 2, -h * (SPRITE_FEET_Y / SPRITE_H));
+    ctx.scale(displayWidth / SPRITE_W, h / SPRITE_H);
+    ctx.drawImage(animated.frame, 0, 0);
+    drawAnimatedKit(ctx, p);
+    ctx.restore();
+  } else if (sprite && rig && p.slideTimer <= 0) {
     const heightScale = 1 + (p.appearance.height ?? 0) * 0.035;
     const buildScale = 1 + (p.appearance.build ?? 0) * 0.035;
     const xOffset = (SPRITE_W - SPRITE_W * buildScale) / 2;
