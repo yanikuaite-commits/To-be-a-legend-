@@ -750,18 +750,46 @@ export function renderMatch(ctx: CanvasRenderingContext2D, engine: MatchEngine, 
   ctx.fillStyle = "#030914";
   ctx.fillRect(0, 0, w, h);
 
+  // Atualiza a câmera para seguir a bola de forma horizontal
+  const ball = engine.ball;
+  const cam = engine.camera;
+  
+  // Ajusta a escala da câmera para aumentar o tamanho do campo
+  cam.scale = Math.max(0.8, cam.scale * 0.95);
+  
+  // Foca na posição da bola, mas mantém a câmera horizontal
+  // Limita o movimento vertical para manter o campo visível
+  const targetX = ball.x;
+  const targetY = clampNumber(ball.y, -PITCH_HALF_W + 20, PITCH_HALF_W - 20);
+  
+  // Suaviza o movimento da câmera
+  const cameraLerp = 0.1;
+  cam.x += (targetX - cam.x) * cameraLerp;
+  cam.y += (targetY - cam.y) * cameraLerp;
+
   drawPitch(ctx, engine);
   drawGoals(ctx, engine);
 
-  const cullMargin = Math.max(120, Math.min(w, h) * 0.25);
+  // Ajusta o culling para renderizar apenas jogadores próximos à bola
+  const cullMargin = Math.max(60, Math.min(w, h) * 0.15);
+  const ballScreen = engine.project(ball.x, ball.y);
+  
   const screenPlayers = engine.players
     .filter((p) => p.active)
     .map((p) => ({ p, screen: engine.project(p.x, p.y) }))
-    .filter(({ screen }) =>
-      screen.x > -cullMargin && screen.x < w + cullMargin &&
-      screen.y > -cullMargin && screen.y < h + cullMargin,
-    )
+    .filter(({ screen, p }) => {
+      // Verifica se o jogador está dentro da tela
+      const inScreen = screen.x > -cullMargin && screen.x < w + cullMargin &&
+                      screen.y > -cullMargin && screen.y < h + cullMargin;
+      
+      // Verifica se o jogador está próximo da bola (distância máxima de 15 unidades)
+      const distToBall = Math.hypot(p.x - ball.x, p.y - ball.y);
+      const nearBall = distToBall < 15;
+      
+      return inScreen && nearBall;
+    })
     .sort((a, b) => a.screen.y - b.screen.y);
+  
   for (const { p } of screenPlayers) drawPlayer(ctx, engine, p, time);
   drawBall(ctx, engine);
 
