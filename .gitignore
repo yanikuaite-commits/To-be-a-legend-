@@ -1,2 +1,16 @@
-.tools/
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Tooling / local binaries
+.tools/*
+!.tools/export-godot-data.ts
 *.x86_64
+
+# Godot
+godot/.godot/
+godot/exports/
+*.tmp
