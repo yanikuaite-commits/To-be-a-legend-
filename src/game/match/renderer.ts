@@ -331,62 +331,6 @@ function animationForPlayer(
   phase: number,
 ): { frame: HTMLCanvasElement; mirrorX: boolean } | null {
   if (p.slideTimer > 0) return null;
-  
-  // Goalkeeper-specific animations
-  if (p.isGK) {
-    const hasBall = engine.ball.ownerId === p.id;
-    const ballDist = Math.hypot(engine.ball.x - p.x, engine.ball.y - p.y);
-    
-    if (hasBall) {
-      // Holding the ball - goalkeeper is stationary with ball
-      const frames = engine.animationFrames.get("gk_hold");
-      if (frames?.length) {
-        return { frame: frames[0], mirrorX: false };
-      }
-    } else if (ballDist < 3) {
-      // Diving or preparing to save
-      const frames = engine.animationFrames.get("gk_dive");
-      if (frames?.length) {
-        const progress = (phase % (Math.PI * 2)) / (Math.PI * 2);
-        const frameIndex = Math.floor(progress * frames.length);
-        return { frame: frames[frameIndex], mirrorX: false };
-      }
-    } else if (speed < 0.5) {
-      // Ready stance - slight bobbing
-      const frames = engine.animationFrames.get("gk_ready");
-      if (frames?.length) {
-        const progress = (phase % (Math.PI * 2)) / (Math.PI * 2);
-        const frameIndex = Math.floor(progress * frames.length);
-        return { frame: frames[frameIndex], mirrorX: false };
-      }
-    }
-    // Default goalkeeper movement
-    const mode = speed > 3.2 ? "run" : "walk";
-    let sequence: string;
-    const mirrorX = false;
-
-    if (Math.abs(screenY) > Math.abs(screenX) * 1.6) {
-      if (screenY > 0) {
-        sequence = `${mode}_front`;
-      } else {
-        sequence = mode === "run" ? `run_back_${(p.id % 2) + 1}` : "walk_back";
-      }
-    } else if (Math.abs(screenX) > Math.abs(screenY) * 1.6) {
-      sequence = `${mode}_side_${screenX > 0 ? "right" : "left"}`;
-    } else {
-      sequence = `${mode}_diagonal_${screenX > 0 ? "right" : "left"}`;
-    }
-    
-    const frames = engine.animationFrames.get(sequence);
-    if (!frames?.length) return null;
-    const progress = speed > 0.5
-      ? ((phase % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2) / (Math.PI * 2)
-      : 0;
-    const frameIndex = Math.min(frames.length - 1, Math.floor(progress * frames.length));
-    return { frame: frames[frameIndex], mirrorX };
-  }
-  
-  // Regular player animations (existing code)
   const mode = speed > 3.2 ? "run" : "walk";
   let sequence: string;
   const mirrorX = false;
@@ -412,7 +356,7 @@ function animationForPlayer(
   return { frame: frames[frameIndex], mirrorX };
 }
 
-function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer, swayX: number = 0, swayY: number = 0): void {
+function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer): void {
   const jersey = () => {
     ctx.beginPath();
     ctx.moveTo(91, 183);
@@ -433,9 +377,6 @@ function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer, swayX: n
   };
 
   ctx.save();
-  // Apply physics-based sway to the jersey
-  ctx.translate(swayX, swayY);
-  
   ctx.globalCompositeOperation = "source-atop";
   ctx.fillStyle = p.kit.primary;
   jersey();
@@ -483,29 +424,6 @@ function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer, swayX: n
   ctx.fillStyle = p.kit.trim;
   ctx.fillRect(126, 300, 5, 78);
 
-  // Goalkeeper gloves
-  if (p.isGK) {
-    ctx.save();
-    ctx.fillStyle = "#f8fafc";
-    // Left glove
-    ctx.beginPath();
-    ctx.moveTo(75, 240);
-    ctx.lineTo(85, 240);
-    ctx.lineTo(85, 260);
-    ctx.lineTo(75, 260);
-    ctx.closePath();
-    ctx.fill();
-    // Right glove
-    ctx.beginPath();
-    ctx.moveTo(171, 240);
-    ctx.lineTo(181, 240);
-    ctx.lineTo(181, 260);
-    ctx.lineTo(171, 260);
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  }
-
   ctx.save();
   ctx.font = '900 29px "Arial Black", Impact, sans-serif';
   ctx.textAlign = "center";
@@ -516,7 +434,7 @@ function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer, swayX: n
   ctx.fillStyle = p.kit.number;
   ctx.fillText(String(p.number), 128, 259);
   ctx.restore();
-  ctx.restore(); // Restore from sway translate
+  ctx.restore();
 }
 
 function drawPlayer(
@@ -561,10 +479,6 @@ function drawPlayer(
   const screenFacingY = p.fx * Math.sin(cam.rot) + p.fy * Math.cos(cam.rot);
   const animated = animationForPlayer(engine, p, speed, screenFacing, screenFacingY, phase);
 
-  // Calculate jersey sway based on player velocity (physics simulation)
-  const kitSwayX = p.vx * 0.5;
-  const kitSwayY = p.vy * 0.5;
-
   // Shadow.
   ctx.save();
   ctx.globalAlpha = 0.35;
@@ -582,7 +496,7 @@ function drawPlayer(
     ctx.translate(-displayWidth / 2, -h * (SPRITE_FEET_Y / SPRITE_H));
     ctx.scale(displayWidth / SPRITE_W, h / SPRITE_H);
     ctx.drawImage(animated.frame, 0, 0);
-    drawAnimatedKit(ctx, p, kitSwayX, kitSwayY);
+    drawAnimatedKit(ctx, p);
     ctx.restore();
   } else if (sprite && rig && p.slideTimer <= 0) {
     const heightScale = 1 + (p.appearance.height ?? 0) * 0.035;
@@ -836,46 +750,18 @@ export function renderMatch(ctx: CanvasRenderingContext2D, engine: MatchEngine, 
   ctx.fillStyle = "#030914";
   ctx.fillRect(0, 0, w, h);
 
-  // Atualiza a câmera para seguir a bola de forma horizontal
-  const ball = engine.ball;
-  const cam = engine.camera;
-  
-  // Ajusta a escala da câmera para aumentar o tamanho do campo
-  cam.scale = Math.max(0.8, cam.scale * 0.95);
-  
-  // Foca na posição da bola, mas mantém a câmera horizontal
-  // Limita o movimento vertical para manter o campo visível
-  const targetX = ball.x;
-  const targetY = clampNumber(ball.y, -PITCH_HALF_W + 20, PITCH_HALF_W - 20);
-  
-  // Suaviza o movimento da câmera
-  const cameraLerp = 0.1;
-  cam.x += (targetX - cam.x) * cameraLerp;
-  cam.y += (targetY - cam.y) * cameraLerp;
-
   drawPitch(ctx, engine);
   drawGoals(ctx, engine);
 
-  // Ajusta o culling para renderizar apenas jogadores próximos à bola
-  const cullMargin = Math.max(60, Math.min(w, h) * 0.15);
-  const ballScreen = engine.project(ball.x, ball.y);
-  
+  const cullMargin = Math.max(120, Math.min(w, h) * 0.25);
   const screenPlayers = engine.players
     .filter((p) => p.active)
     .map((p) => ({ p, screen: engine.project(p.x, p.y) }))
-    .filter(({ screen, p }) => {
-      // Verifica se o jogador está dentro da tela
-      const inScreen = screen.x > -cullMargin && screen.x < w + cullMargin &&
-                      screen.y > -cullMargin && screen.y < h + cullMargin;
-      
-      // Verifica se o jogador está próximo da bola (distância máxima de 15 unidades)
-      const distToBall = Math.hypot(p.x - ball.x, p.y - ball.y);
-      const nearBall = distToBall < 15;
-      
-      return inScreen && nearBall;
-    })
+    .filter(({ screen }) =>
+      screen.x > -cullMargin && screen.x < w + cullMargin &&
+      screen.y > -cullMargin && screen.y < h + cullMargin,
+    )
     .sort((a, b) => a.screen.y - b.screen.y);
-  
   for (const { p } of screenPlayers) drawPlayer(ctx, engine, p, time);
   drawBall(ctx, engine);
 

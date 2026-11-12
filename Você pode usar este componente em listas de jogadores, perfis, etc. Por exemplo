@@ -1,9 +1,0 @@
-<PlayerCard
-  clubId="club1"
-  number={10}
-  name="Cristiano"
-  position="DC"
-  overall={92}
-  size="md"
-  onClick={() => console.log("Player clicked")}
-/>
