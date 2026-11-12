@@ -1,0 +1,28 @@
+{
+  "formula": "cor_final = cor_escolhida (RGB) x camada_cinza (0..1)  [multiply, mantém a sombra e o contorno]",
+  "skin_tones": {
+    "tom_1_porcelana": "#FDDCC0",
+    "tom_2_claro": "#F6C39C",
+    "tom_3_medio_claro": "#F8AC6B",
+    "tom_4_dourado": "#D9895A",
+    "tom_5_moreno": "#B96B3E",
+    "tom_6_castanho": "#94502C",
+    "tom_7_escuro": "#6E3A20",
+    "tom_8_ebano": "#4A2616"
+  },
+  "hair_colors": {
+    "preto": "#1B1514",
+    "castanho_escuro": "#3B2415",
+    "castanho": "#6A4325",
+    "louro_escuro": "#A97C45",
+    "louro": "#E3C58A",
+    "platina": "#F0E6C8",
+    "ruivo": "#A33A1E",
+    "vermelho": "#B3202A",
+    "cinza": "#9A9A9A",
+    "branco": "#EDEDED",
+    "azul": "#2E5FBF",
+    "roxo": "#7A3FBF",
+    "rosa": "#E05A9C"
+  }
+}
