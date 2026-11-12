@@ -14,3 +14,4 @@ dist/
 godot/.godot/
 godot/exports/
 *.tmp
+.aider*
