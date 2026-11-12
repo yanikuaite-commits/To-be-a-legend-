@@ -1,0 +1,12 @@
+{
+  "appId": "com.tobealegend.game",
+  "appName": "To be a Legend",
+  "webDir": "dist",
+  "android": {
+    "allowMixedContent": false,
+    "webContentsDebuggingEnabled": false
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}

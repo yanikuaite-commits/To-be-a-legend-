@@ -166,7 +166,7 @@ export function MainMenu({
         </div>
 
         <div className="menu-footer">
-          <span>To be a Legend · v1.0</span>
+          <span>To be a Legend · v{__APP_VERSION__}</span>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
             <ChevronRight size={12} /> Desliza e toca. Sem analógico.
           </span>

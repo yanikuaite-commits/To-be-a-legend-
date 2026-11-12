@@ -118,38 +118,6 @@ jobs:
           print("export templates installed:", len(os.listdir(dest)))
           PY
 
-      - name: Configure Godot for Android
-        run: |
-          mkdir -p "$HOME/.config/godot"
-          python3 - <<'PY'
-          import os
-          p = os.path.expanduser("~/.config/godot/editor_settings-4.3.tres")
-          if not os.path.exists(p):
-              open(p, "w").write('[gd_resource type="EditorSettings" format=3]\n\n[resource]\n')
-          s = open(p).read()
-          vals = {
-              "export/android/java_sdk_path": os.environ["JAVA_HOME"],
-              "export/android/android_sdk_path": os.environ.get("ANDROID_SDK_ROOT") or os.environ["ANDROID_HOME"],
-              "export/android/debug_keystore": os.path.expanduser("~/debug.keystore"),
-          }
-          for k, v in vals.items():
-              if f"{k} = " in s:
-                  s = "\n".join(
-                      f'{k} = "{v}"' if line.startswith(f"{k} = ") else line for line in s.splitlines()
-                  ) + "\n"
-              else:
-                  s += f'{k} = "{v}"\n'
-          open(p, "w").write(s)
-          PY
-
-      - name: Generate debug keystore
-        run: |
-          keytool -genkeypair -v \
-            -keystore "$HOME/debug.keystore" \
-            -storepass android -alias androiddebugkey -keypass android \
-            -keyalg RSA -keysize 2048 -validity 10000 \
-            -dname "CN=Android Debug,O=Android,C=US"
-
       - name: Prepare release signing key
         env:
           KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
@@ -161,11 +129,6 @@ jobs:
           if [ -n "${KEYSTORE_BASE64}" ]; then
             echo "Usar o keystore de release dos secrets."
             printf '%s' "${KEYSTORE_BASE64}" | base64 -d > "$HOME/release.keystore"
-            {
-              echo "GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$HOME/release.keystore"
-              echo "GODOT_ANDROID_KEYSTORE_RELEASE_USER=${KEY_ALIAS:-release}"
-              echo "GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=${KEY_PASSWORD:-$KEYSTORE_PASSWORD}"
-            } >> "$GITHUB_ENV"
           else
             # Fallback: sem um keystore persistente, assina com um keystore
             # efemero. O APK instala, mas a assinatura muda em cada release, por
@@ -178,32 +141,48 @@ jobs:
               -storepass releasepass -alias release -keypass releasepass \
               -keyalg RSA -keysize 2048 -validity 10000 \
               -dname "CN=To Be a Legend,O=TBAL,C=PT"
-            {
-              echo "GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$HOME/release.keystore"
-              echo "GODOT_ANDROID_KEYSTORE_RELEASE_USER=release"
-              echo "GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=releasepass"
-            } >> "$GITHUB_ENV"
+            echo "KEY_ALIAS=release" >> "$GITHUB_ENV"
+            echo "KEY_PASSWORD=releasepass" >> "$GITHUB_ENV"
+            echo "KEYSTORE_PASSWORD=releasepass" >> "$GITHUB_ENV"
           fi
+          {
+            echo "TBAL_KEYSTORE=$HOME/release.keystore"
+            echo "TBAL_KEY_ALIAS=${KEY_ALIAS:-release}"
+            echo "TBAL_KEY_PASSWORD=${KEY_PASSWORD:-$KEYSTORE_PASSWORD}"
+            echo "TBAL_KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD:-releasepass}"
+          } >> "$GITHUB_ENV"
+
+      - name: Build signed Android APK (Capacitor)
+        env:
+          VERSION: ${{ github.event.inputs.tag || github.ref_name }}
+        run: |
+          set -euo pipefail
+          # The APK wraps the real React game through Capacitor, so it ships the
+          # full career mode. `cap sync` copies `dist/` into the native project.
+          # The tag drives versionName, and versionCode grows monotonically so a
+          # newer release installs over an older one.
+          export TBAL_VERSION_NAME="${VERSION#v}"
+          # versionCode = major*10000 + minor*100 + patch (v1.1.0 -> 10100).
+          export TBAL_VERSION_CODE="$(python3 -c "import sys; p=(sys.argv[1].lstrip('v').split('.')+['0','0'])[:3]; print(int(p[0])*10000+int(p[1])*100+int(p[2]))" "${VERSION}")"
+          npx cap sync android
+          ( cd android && ./gradlew assembleRelease --no-daemon )
 
       - name: Export Godot builds
         run: |
           set -o pipefail
           GODOT="$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
-          mkdir -p godot/exports/linux godot/exports/web godot/exports/android
+          mkdir -p godot/exports/linux godot/exports/web
           "$GODOT" --headless --path godot --import
           "$GODOT" --headless --path godot --export-release "Linux" 2>&1 \
             | grep -vE "savepack|Storing File"
           "$GODOT" --headless --path godot --export-release "Web" 2>&1 \
             | grep -vE "savepack|Storing File"
-          "$GODOT" --headless --path godot --export-release "Android" 2>&1 \
-            | grep -vE "savepack|Storing File"
-          test -f godot/exports/android/ToBeALegend.apk
 
       - name: Verify APK is signed
         run: |
           set -o pipefail
           APKSIGNER=$(ls "$ANDROID_SDK_ROOT"/build-tools/*/apksigner | sort -V | tail -1)
-          "$APKSIGNER" verify --verbose godot/exports/android/ToBeALegend.apk
+          "$APKSIGNER" verify --verbose android/app/build/outputs/apk/release/app-release.apk
 
       - name: Assemble archives
         env:
@@ -216,7 +195,7 @@ jobs:
           ( cd dist && zip -qr "../release/to-be-a-legend-web-${VERSION}.zip" . )
           ( cd godot/exports/web && zip -qr "../../../release/to-be-a-legend-godot-web-${VERSION}.zip" . )
           ( cd godot/exports/linux && zip -q "../../../release/to-be-a-legend-linux-${VERSION}.zip" ToBeALegend.x86_64 ToBeALegend.pck )
-          cp godot/exports/android/ToBeALegend.apk "release/to-be-a-legend-android-${VERSION}.apk"
+          cp android/app/build/outputs/apk/release/app-release.apk "release/to-be-a-legend-android-${VERSION}.apk"
 
           ls -lh release/
 
@@ -267,9 +246,9 @@ jobs:
 
             | Ficheiro | O que é |
             | --- | --- |
-            | `to-be-a-legend-android-*.apk` | App Android (Godot 4.3, arm64-v8a). Instala no telemóvel — pode ser preciso autorizar "instalar de fontes desconhecidas". |
+            | `to-be-a-legend-android-*.apk` | App Android com o **jogo completo** (o mesmo motor React do web, empacotado em WebView via Capacitor). Instala no telemóvel — pode ser preciso autorizar "instalar de fontes desconhecidas". |
             | `to-be-a-legend-web-*.zip` | Jogo principal (React + TypeScript). Abre no browser do telemóvel e pode ser **instalado** (Adicionar ao ecrã principal) porque é uma PWA. |
-            | `to-be-a-legend-godot-web-*.zip` | Port Godot para o browser (WebAssembly), também instalável como PWA. |
+            | `to-be-a-legend-godot-web-*.zip` | Port Godot para o browser (WebAssembly), uma versão reduzida do jogo. |
 
             ### Computador
 
