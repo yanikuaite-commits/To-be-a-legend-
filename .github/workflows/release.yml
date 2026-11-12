@@ -121,35 +121,39 @@ jobs:
       - name: Prepare release signing key
         env:
           KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
-          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          STORE_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          STORE_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           set -euo pipefail
+          # Resolve everything into local variables first: values written to
+          # GITHUB_ENV only apply to later steps, so referencing them here would
+          # silently yield empty strings.
+          store_password="${STORE_PASSWORD:-releasepass}"
+          key_alias="${STORE_ALIAS:-release}"
           if [ -n "${KEYSTORE_BASE64}" ]; then
-            echo "Usar o keystore de release dos secrets."
+            echo "A usar o keystore de release dos secrets."
             printf '%s' "${KEYSTORE_BASE64}" | base64 -d > "$HOME/release.keystore"
+            key_password="${STORE_KEY_PASSWORD:-$store_password}"
           else
             # Fallback: sem um keystore persistente, assina com um keystore
             # efemero. O APK instala, mas a assinatura muda em cada release, por
-            # isso as atualizações exigem desinstalar primeiro. Para uma
+            # isso as atualizacoes exigem desinstalar primeiro. Para uma
             # identidade estavel, definir ANDROID_KEYSTORE_BASE64 e as
-            # passwords correspondentes nos secrets do repositório.
+            # passwords correspondentes nos secrets do repositorio.
             echo "::warning::Sem ANDROID_KEYSTORE_BASE64: a assinar o APK de release com um keystore efemero. Adiciona os secrets para uma assinatura estavel."
             keytool -genkeypair -v \
               -keystore "$HOME/release.keystore" \
-              -storepass releasepass -alias release -keypass releasepass \
+              -storepass "$store_password" -alias "$key_alias" -keypass "$store_password" \
               -keyalg RSA -keysize 2048 -validity 10000 \
               -dname "CN=To Be a Legend,O=TBAL,C=PT"
-            echo "KEY_ALIAS=release" >> "$GITHUB_ENV"
-            echo "KEY_PASSWORD=releasepass" >> "$GITHUB_ENV"
-            echo "KEYSTORE_PASSWORD=releasepass" >> "$GITHUB_ENV"
+            key_password="$store_password"
           fi
           {
             echo "TBAL_KEYSTORE=$HOME/release.keystore"
-            echo "TBAL_KEY_ALIAS=${KEY_ALIAS:-release}"
-            echo "TBAL_KEY_PASSWORD=${KEY_PASSWORD:-$KEYSTORE_PASSWORD}"
-            echo "TBAL_KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD:-releasepass}"
+            echo "TBAL_KEY_ALIAS=$key_alias"
+            echo "TBAL_KEY_PASSWORD=$key_password"
+            echo "TBAL_KEYSTORE_PASSWORD=$store_password"
           } >> "$GITHUB_ENV"
 
       - name: Build signed Android APK (Capacitor)
@@ -166,6 +170,9 @@ jobs:
           export TBAL_VERSION_CODE="$(python3 -c "import sys; p=(sys.argv[1].lstrip('v').split('.')+['0','0'])[:3]; print(int(p[0])*10000+int(p[1])*100+int(p[2]))" "${VERSION}")"
           npx cap sync android
           ( cd android && ./gradlew assembleRelease --no-daemon )
+          # Sem uma assinatura valida o Gradle produz app-release-unsigned.apk;
+          # falhar aqui evita publicar (ou verificar) um APK inexistente.
+          test -f android/app/build/outputs/apk/release/app-release.apk
 
       - name: Export Godot builds
         run: |
