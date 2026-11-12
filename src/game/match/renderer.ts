@@ -356,7 +356,7 @@ function animationForPlayer(
   return { frame: frames[frameIndex], mirrorX };
 }
 
-function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer): void {
+function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer, swayX: number = 0, swayY: number = 0): void {
   const jersey = () => {
     ctx.beginPath();
     ctx.moveTo(91, 183);
@@ -377,6 +377,9 @@ function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer): void {
   };
 
   ctx.save();
+  // Apply physics-based sway to the jersey
+  ctx.translate(swayX, swayY);
+  
   ctx.globalCompositeOperation = "source-atop";
   ctx.fillStyle = p.kit.primary;
   jersey();
@@ -434,7 +437,7 @@ function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer): void {
   ctx.fillStyle = p.kit.number;
   ctx.fillText(String(p.number), 128, 259);
   ctx.restore();
-  ctx.restore();
+  ctx.restore(); // Restore from sway translate
 }
 
 function drawPlayer(
@@ -479,6 +482,10 @@ function drawPlayer(
   const screenFacingY = p.fx * Math.sin(cam.rot) + p.fy * Math.cos(cam.rot);
   const animated = animationForPlayer(engine, p, speed, screenFacing, screenFacingY, phase);
 
+  // Calculate jersey sway based on player velocity (physics simulation)
+  const kitSwayX = p.vx * 0.5;
+  const kitSwayY = p.vy * 0.5;
+
   // Shadow.
   ctx.save();
   ctx.globalAlpha = 0.35;
@@ -496,7 +503,7 @@ function drawPlayer(
     ctx.translate(-displayWidth / 2, -h * (SPRITE_FEET_Y / SPRITE_H));
     ctx.scale(displayWidth / SPRITE_W, h / SPRITE_H);
     ctx.drawImage(animated.frame, 0, 0);
-    drawAnimatedKit(ctx, p);
+    drawAnimatedKit(ctx, p, kitSwayX, kitSwayY);
     ctx.restore();
   } else if (sprite && rig && p.slideTimer <= 0) {
     const heightScale = 1 + (p.appearance.height ?? 0) * 0.035;
