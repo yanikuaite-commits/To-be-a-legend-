@@ -7,6 +7,9 @@ interface JerseyProps {
   size?: "sm" | "md" | "lg";
   className?: string;
   showDetails?: boolean;
+  hairStyle?: string;
+  hairColor?: string;
+  skinColor?: string;
 }
 
 export function Jersey({
@@ -16,6 +19,9 @@ export function Jersey({
   size = "md",
   className = "",
   showDetails = true,
+  hairStyle = "short",
+  hairColor = "#000000",
+  skinColor = "#d9895a",
 }: JerseyProps) {
   const club = getClub(clubId);
   
@@ -44,6 +50,38 @@ export function Jersey({
       }}
       title={club.name}
     >
+      {/* Cabeça com cabelo e pele */}
+      <div className="relative mb-1">
+        {/* Cabelo */}
+        <div 
+          className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-4 rounded-t-full"
+          style={{ backgroundColor: hairColor }}
+        >
+          {hairStyle === "long" && (
+            <div 
+              className="absolute -bottom-2 left-0 w-8 h-6 rounded-b-full"
+              style={{ backgroundColor: hairColor }}
+            />
+          )}
+          {hairStyle === "curly" && (
+            <div 
+              className="absolute -bottom-1 left-0 w-8 h-4 rounded-b-full"
+              style={{ 
+                backgroundColor: hairColor,
+                background: `radial-gradient(circle, ${hairColor} 30%, ${hairColor} 30%)`,
+                backgroundSize: "4px 4px"
+              }}
+            />
+          )}
+        </div>
+        
+        {/* Rosto/pele */}
+        <div 
+          className="w-6 h-6 rounded-full"
+          style={{ backgroundColor: skinColor }}
+        />
+      </div>
+
       {/* Club Crest Area */}
       <div className="absolute top-1 left-1 w-4 h-4 bg-white/90 rounded-full flex items-center justify-center">
         <span 

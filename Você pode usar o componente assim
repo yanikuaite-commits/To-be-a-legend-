@@ -1,0 +1,13 @@
+<PlayerCard
+  clubId="club1"
+  number={10}
+  name="Cristiano"
+  position="DC"
+  overall={92}
+  appearance={{
+    hairStyle: "long",
+    hairColor: "#8B4513",
+    skinColor: "#d9895a"
+  }}
+  size="md"
+/>

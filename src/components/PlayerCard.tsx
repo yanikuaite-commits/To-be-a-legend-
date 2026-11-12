@@ -10,6 +10,9 @@ interface PlayerCardProps {
   appearance?: {
     height?: number;
     build?: number;
+    hairStyle?: string;
+    hairColor?: string;
+    skinColor?: string;
   };
   size?: "sm" | "md" | "lg";
   onClick?: () => void;
@@ -48,6 +51,9 @@ export function PlayerCard({
           playerNumber={number}
           size={size}
           showDetails={size !== "sm"}
+          hairStyle={appearance?.hairStyle}
+          hairColor={appearance?.hairColor}
+          skinColor={appearance?.skinColor}
         />
 
         {/* Informações do jogador */}
