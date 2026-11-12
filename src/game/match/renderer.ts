@@ -1,4 +1,5 @@
 import { PITCH_HALF_L, PITCH_HALF_W, GOAL_HALF, type MatchEngine, type MatchPlayer } from "./engine";
+import { kitHasKeyColors, recolorFrames } from "./kit-recolor";
 
 const SPRITE_W = 256;
 const SPRITE_H = 512;
@@ -6,9 +7,10 @@ const SPRITE_FEET_Y = 500;
 const GOAL_DEPTH = 4.6;
 
 /**
- * Os spritesheets atuais são neutros (cinzento + pele), por isso a cor do clube
- * é pintada por cima em runtime. Quando os sprites já vierem com o uniforme
- * desenhado, pôr em `false` para o jogo deixar de pintar a camisola por cima.
+ * Os spritesheets antigos são neutros (cinzento + pele), por isso a cor do clube
+ * era pintada por cima com um polígono fixo. Quando os sprites já trouxerem a
+ * roupa em cores-chave, a cor entra por recoloração e a pintura por cima sai
+ * sozinha — ver `kitHasKeyColors`.
  */
 const PAINT_KIT_OVER_ANIMATION = true;
 // Deliberately taller than life: the chibi players have oversized heads, and the
@@ -329,6 +331,18 @@ function drawSpriteSlice(
   ctx.restore();
 }
 
+function animationSequenceFor(p: MatchPlayer, speed: number, screenX: number, screenY: number): string {
+  const mode = speed > 3.2 ? "run" : "walk";
+  if (Math.abs(screenY) > Math.abs(screenX) * 1.6) {
+    if (screenY > 0) return `${mode}_front`;
+    return mode === "run" ? `run_back_${(p.id % 2) + 1}` : "walk_back";
+  }
+  if (Math.abs(screenX) > Math.abs(screenY) * 1.6) {
+    return `${mode}_side_${screenX > 0 ? "right" : "left"}`;
+  }
+  return `${mode}_diagonal_${screenX > 0 ? "right" : "left"}`;
+}
+
 function animationForPlayer(
   engine: MatchEngine,
   p: MatchPlayer,
@@ -338,29 +352,15 @@ function animationForPlayer(
   phase: number,
 ): { frame: HTMLCanvasElement; mirrorX: boolean } | null {
   if (p.slideTimer > 0) return null;
-  const mode = speed > 3.2 ? "run" : "walk";
-  let sequence: string;
-  const mirrorX = false;
-
-  if (Math.abs(screenY) > Math.abs(screenX) * 1.6) {
-    if (screenY > 0) {
-      sequence = `${mode}_front`;
-    } else {
-      sequence = mode === "run" ? `run_back_${(p.id % 2) + 1}` : "walk_back";
-    }
-  } else if (Math.abs(screenX) > Math.abs(screenY) * 1.6) {
-    sequence = `${mode}_side_${screenX > 0 ? "right" : "left"}`;
-  } else {
-    sequence = `${mode}_diagonal_${screenX > 0 ? "right" : "left"}`;
-  }
-
+  const sequence = animationSequenceFor(p, speed, screenX, screenY);
   const frames = engine.animationFrames.get(sequence);
   if (!frames?.length) return null;
   const progress = speed > 0.5
     ? ((phase % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2) / (Math.PI * 2)
     : 0;
   const frameIndex = Math.min(frames.length - 1, Math.floor(progress * frames.length));
-  return { frame: frames[frameIndex], mirrorX };
+  const kitFrames = recolorFrames(sequence, frames, p.kit);
+  return { frame: kitFrames[frameIndex] ?? frames[frameIndex], mirrorX: false };
 }
 
 function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer): void {
@@ -485,6 +485,11 @@ function drawPlayer(
   const flip = screenFacing < -0.15 ? -1 : screenFacing > 0.15 ? 1 : 1;
   const screenFacingY = p.fx * Math.sin(cam.rot) + p.fy * Math.cos(cam.rot);
   const animated = animationForPlayer(engine, p, speed, screenFacing, screenFacingY, phase);
+  const sequence = animationSequenceFor(p, speed, screenFacing, screenFacingY);
+  const paintOver = PAINT_KIT_OVER_ANIMATION && !kitHasKeyColors(
+    sequence,
+    engine.animationFrames.get(sequence) ?? [],
+  );
 
   // Shadow.
   ctx.save();
@@ -503,7 +508,7 @@ function drawPlayer(
     ctx.translate(-displayWidth / 2, -h * (SPRITE_FEET_Y / SPRITE_H));
     ctx.scale(displayWidth / SPRITE_W, h / SPRITE_H);
     ctx.drawImage(animated.frame, 0, 0);
-    if (PAINT_KIT_OVER_ANIMATION) drawAnimatedKit(ctx, p);
+    if (paintOver) drawAnimatedKit(ctx, p);
     ctx.restore();
   } else if (sprite && rig && p.slideTimer <= 0) {
     const heightScale = 1 + (p.appearance.height ?? 0) * 0.035;

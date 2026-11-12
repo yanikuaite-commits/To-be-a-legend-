@@ -4,6 +4,7 @@ import { MatchEngine } from "../game/match/engine";
 import { renderMatch } from "../game/match/renderer";
 import { buildMatchSetup } from "../game/match/setup";
 import { loadMatchAnimations } from "../game/match/animation-assets";
+import { prewarmKitFrames } from "../game/match/kit-recolor";
 import type { MatchReport } from "../game/match/types";
 import { composeCharacter, composeCharacterSyncFallback, getCharacterRig } from "../game/characters/assets";
 import { haptic, sfxGoal, sfxKick, sfxWhistle } from "../game/audio";
@@ -95,6 +96,10 @@ export function MatchScreen({
         engine.setAnimationFrames(new Map());
       } else {
         engine.setAnimationFrames(animations.frames);
+        prewarmKitFrames(
+          animations.frames,
+          engine.players.flatMap((player) => [player.kit]),
+        );
       }
       engine.setBallImage(image);
       engine.start();

@@ -141,3 +141,19 @@ uniformes. A cor é aplicada em runtime.
 - Escudos: `Crest` em `src/components/ui.tsx` é um SVG (escudo com faixa diagonal,
   gradiente e contorno) que usa `primary`/`secondary`/`accent` do clube. O CSS
   está em `src/index.css` (`.crest`, `.crest-svg`, `.crest-letter`).
+
+## Recoloração de uniformes na partida
+
+`src/game/match/kit-recolor.ts` troca as cores-chave do sprite pela paleta do
+clube, em vez de pintar a camisola por cima com um polígono fixo.
+
+- Cores-chave (opacas, exatas): gola `#ffff00`, camisola `#ff00ff`, calções
+  `#00ffff`, meias `#00ff00`. Ver `docs/guia-uniformes.md`.
+- `kitHasKeyColors()` deteta se uma sequência já traz a roupa em cores-chave. Se
+  sim, `drawAnimatedKit` (a máscara antiga) deixa de correr sozinho.
+- `prewarmKitFrames()` pré-calcula a recolha no carregamento da partida, para a
+  primeira jogada não engasgar.
+- Custo medido (V8): ~0,6 ms por frame, ~61 ms por kit completo. Cache limitada
+  às 10 sequências mais recentes (~40 MB).
+- Os sprites antigos são neutros (sem cores-chave) e não disparam nada — o
+  comportamento atual mantém-se.
