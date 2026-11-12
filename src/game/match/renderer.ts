@@ -331,6 +331,62 @@ function animationForPlayer(
   phase: number,
 ): { frame: HTMLCanvasElement; mirrorX: boolean } | null {
   if (p.slideTimer > 0) return null;
+  
+  // Goalkeeper-specific animations
+  if (p.isGK) {
+    const hasBall = engine.ball.ownerId === p.id;
+    const ballDist = Math.hypot(engine.ball.x - p.x, engine.ball.y - p.y);
+    
+    if (hasBall) {
+      // Holding the ball - goalkeeper is stationary with ball
+      const frames = engine.animationFrames.get("gk_hold");
+      if (frames?.length) {
+        return { frame: frames[0], mirrorX: false };
+      }
+    } else if (ballDist < 3) {
+      // Diving or preparing to save
+      const frames = engine.animationFrames.get("gk_dive");
+      if (frames?.length) {
+        const progress = (phase % (Math.PI * 2)) / (Math.PI * 2);
+        const frameIndex = Math.floor(progress * frames.length);
+        return { frame: frames[frameIndex], mirrorX: false };
+      }
+    } else if (speed < 0.5) {
+      // Ready stance - slight bobbing
+      const frames = engine.animationFrames.get("gk_ready");
+      if (frames?.length) {
+        const progress = (phase % (Math.PI * 2)) / (Math.PI * 2);
+        const frameIndex = Math.floor(progress * frames.length);
+        return { frame: frames[frameIndex], mirrorX: false };
+      }
+    }
+    // Default goalkeeper movement
+    const mode = speed > 3.2 ? "run" : "walk";
+    let sequence: string;
+    const mirrorX = false;
+
+    if (Math.abs(screenY) > Math.abs(screenX) * 1.6) {
+      if (screenY > 0) {
+        sequence = `${mode}_front`;
+      } else {
+        sequence = mode === "run" ? `run_back_${(p.id % 2) + 1}` : "walk_back";
+      }
+    } else if (Math.abs(screenX) > Math.abs(screenY) * 1.6) {
+      sequence = `${mode}_side_${screenX > 0 ? "right" : "left"}`;
+    } else {
+      sequence = `${mode}_diagonal_${screenX > 0 ? "right" : "left"}`;
+    }
+    
+    const frames = engine.animationFrames.get(sequence);
+    if (!frames?.length) return null;
+    const progress = speed > 0.5
+      ? ((phase % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2) / (Math.PI * 2)
+      : 0;
+    const frameIndex = Math.min(frames.length - 1, Math.floor(progress * frames.length));
+    return { frame: frames[frameIndex], mirrorX };
+  }
+  
+  // Regular player animations (existing code)
   const mode = speed > 3.2 ? "run" : "walk";
   let sequence: string;
   const mirrorX = false;
@@ -426,6 +482,29 @@ function drawAnimatedKit(ctx: CanvasRenderingContext2D, p: MatchPlayer, swayX: n
   ctx.fill();
   ctx.fillStyle = p.kit.trim;
   ctx.fillRect(126, 300, 5, 78);
+
+  // Goalkeeper gloves
+  if (p.isGK) {
+    ctx.save();
+    ctx.fillStyle = "#f8fafc";
+    // Left glove
+    ctx.beginPath();
+    ctx.moveTo(75, 240);
+    ctx.lineTo(85, 240);
+    ctx.lineTo(85, 260);
+    ctx.lineTo(75, 260);
+    ctx.closePath();
+    ctx.fill();
+    // Right glove
+    ctx.beginPath();
+    ctx.moveTo(171, 240);
+    ctx.lineTo(181, 240);
+    ctx.lineTo(181, 260);
+    ctx.lineTo(171, 260);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
 
   ctx.save();
   ctx.font = '900 29px "Arial Black", Impact, sans-serif';
