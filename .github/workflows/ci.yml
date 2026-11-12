@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GODOT_VERSION: "4.3"
+
+jobs:
+  web:
+    name: Web (typecheck + build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck and build
+        run: npm run build
+
+      - name: Upload web build
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: dist/
+          retention-days: 7
+
+  godot:
+    name: Godot (import + tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Godot editor
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: ~/godot
+          key: godot-${{ env.GODOT_VERSION }}-linux
+
+      - name: Download Godot editor
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p "$HOME/godot"
+          curl -sSL -o /tmp/godot.zip \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          python3 -c "import zipfile; zipfile.ZipFile('/tmp/godot.zip').extractall('$HOME/godot')"
+          chmod +x "$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+
+      - name: Import project
+        run: |
+          "$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64" \
+            --headless --path godot --import
+
+      - name: Run engine tests
+        run: |
+          set -o pipefail
+          for scene in CareerTest MatchTest MatchBatchTest CharacterTest UiTest; do
+            echo "::group::$scene"
+            "$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64" \
+              --headless --path godot "res://tests/${scene}.tscn" 2>&1 \
+              | grep -vE "leaked|ObjectDB|_free_rids|at: |ALSA|V-Sync|OpenGL"
+            echo "::endgroup::"
+          done

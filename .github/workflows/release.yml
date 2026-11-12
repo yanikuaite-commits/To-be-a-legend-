@@ -1,0 +1,177 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to publish (e.g. v1.0.0)"
+        required: true
+
+permissions:
+  contents: write
+
+env:
+  GODOT_VERSION: "4.3"
+
+jobs:
+  verify:
+    name: Verify before shipping
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Build web game
+        run: |
+          npm ci
+          npm run build
+
+      - name: Cache Godot editor
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: ~/godot
+          key: godot-${{ env.GODOT_VERSION }}-linux
+
+      - name: Download Godot editor
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p "$HOME/godot"
+          curl -sSL -o /tmp/godot.zip \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          python3 -c "import zipfile; zipfile.ZipFile('/tmp/godot.zip').extractall('$HOME/godot')"
+          chmod +x "$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+
+      - name: Import and test Godot project
+        run: |
+          set -o pipefail
+          GODOT="$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          "$GODOT" --headless --path godot --import
+          for scene in CareerTest MatchTest MatchBatchTest CharacterTest UiTest; do
+            echo "::group::$scene"
+            "$GODOT" --headless --path godot "res://tests/${scene}.tscn" 2>&1 \
+              | grep -vE "leaked|ObjectDB|_free_rids|at: |ALSA|V-Sync|OpenGL"
+            echo "::endgroup::"
+          done
+
+  package:
+    name: Package artifacts
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Build web game
+        run: |
+          npm ci
+          npm run build
+
+      - name: Install Godot editor and export templates
+        env:
+          TEMPLATES_DIR: ~/.local/share/godot/export_templates
+        run: |
+          mkdir -p "$HOME/godot"
+          curl -sSL -o /tmp/godot.zip \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          python3 -c "import zipfile; zipfile.ZipFile('/tmp/godot.zip').extractall('$HOME/godot')"
+          chmod +x "$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+
+          curl -sSL -o /tmp/templates.tpz \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          python3 - <<'PY'
+          import zipfile, os, shutil
+          version = os.environ["GODOT_VERSION"]
+          dest = os.path.expanduser(f"~/.local/share/godot/export_templates/{version}.stable")
+          os.makedirs(dest, exist_ok=True)
+          with zipfile.ZipFile("/tmp/templates.tpz") as z:
+              for n in z.namelist():
+                  if n.startswith("templates/") and not n.endswith("/"):
+                      with z.open(n) as src, open(os.path.join(dest, os.path.basename(n)), "wb") as out:
+                          shutil.copyfileobj(src, out)
+          print("export templates installed:", len(os.listdir(dest)))
+          PY
+
+      - name: Export Godot builds
+        run: |
+          set -o pipefail
+          GODOT="$HOME/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          mkdir -p godot/exports/linux godot/exports/web
+          "$GODOT" --headless --path godot --import
+          "$GODOT" --headless --path godot --export-release "Linux" 2>&1 \
+            | grep -vE "savepack|Storing File"
+          "$GODOT" --headless --path godot --export-release "Web" 2>&1 \
+            | grep -vE "savepack|Storing File"
+
+      - name: Assemble archives
+        env:
+          VERSION: ${{ github.event.inputs.tag || github.ref_name }}
+        run: |
+          set -euo pipefail
+          chmod +x godot/exports/linux/ToBeALegend.x86_64
+          mkdir -p release
+
+          ( cd dist && zip -qr "../release/to-be-a-legend-web-${VERSION}.zip" . )
+          ( cd godot/exports/web && zip -qr "../../../release/to-be-a-legend-godot-web-${VERSION}.zip" . )
+          ( cd godot/exports/linux && zip -q "../../../release/to-be-a-legend-linux-${VERSION}.zip" ToBeALegend.x86_64 ToBeALegend.pck )
+
+          ls -lh release/
+
+      - name: Upload release archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-archives
+          path: release/*.zip
+          retention-days: 5
+
+  publish:
+    name: Publish GitHub Release
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download archives
+        uses: actions/download-artifact@v4
+        with:
+          name: release-archives
+          path: release
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ github.event.inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: To Be a Legend ${{ steps.version.outputs.tag }}
+          generate_release_notes: true
+          files: release/*.zip
+          body: |
+            ## To Be a Legend ${{ steps.version.outputs.tag }}
+
+            Jogo de carreira de futebol, em duas versões jogáveis.
+
+            ### Downloads
+
+            | Ficheiro | O que é |
+            | --- | --- |
+            | `to-be-a-legend-web-*.zip` | Jogo principal para o browser (React + TypeScript). Extrai e serve a pasta, por exemplo `npx serve`. |
+            | `to-be-a-legend-godot-web-*.zip` | Port Godot 4.3 para o browser (WebAssembly). Extrai e serve a pasta, por exemplo `npx serve`. |
+            | `to-be-a-legend-linux-*.zip` | Port Godot 4.3 nativo para Linux x86_64. Extrai e corre `./ToBeALegend.x86_64`. |
+
+            _Artefactos gerados automaticamente pelo GitHub Actions a partir da tag ${{ steps.version.outputs.tag }}._
