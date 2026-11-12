@@ -2,6 +2,25 @@ import { useEffect, type ReactNode } from "react";
 import { X } from "lucide-react";
 import { getClub } from "../game/data/clubs";
 
+const SHIELD_PATH = "M50 3 L95 15 V55 C95 81 74 100 50 109 C26 100 5 81 5 55 V15 Z";
+
+function channel(hex: string, index: number): number {
+  return parseInt(hex.replace("#", "").slice(index * 2, index * 2 + 2), 16);
+}
+
+function shade(hex: string, amount: number): string {
+  const target = amount < 0 ? 0 : 255;
+  const parts = [0, 1, 2].map((i) => {
+    const value = channel(hex, i);
+    return Math.round(value + (target - value) * Math.abs(amount));
+  });
+  return `#${parts.map((v) => v.toString(16).padStart(2, "0")).join("")}`;
+}
+
+function isLight(hex: string): boolean {
+  return (channel(hex, 0) * 299 + channel(hex, 1) * 587 + channel(hex, 2) * 114) / 1000 > 150;
+}
+
 export function Crest({
   clubId,
   size = "md",
@@ -12,20 +31,35 @@ export function Crest({
   className?: string;
 }) {
   const club = getClub(clubId);
+  const { primary, secondary, accent } = club.colors;
   const sizeClass = size === "sm" ? "sm" : size === "lg" ? "lg" : "";
+  const gradientId = `crest-grad-${club.id}`;
+  const clipId = `crest-clip-${club.id}`;
   return (
-    <span
-      className={`crest ${sizeClass} ${className}`}
-      style={
-        {
-          "--c1": club.colors.primary,
-          "--c2": club.colors.secondary,
-        } as React.CSSProperties
-      }
-      aria-label={club.name}
-      title={club.name}
-    >
-      <span className="crest-letter">{club.short.slice(0, 3)}</span>
+    <span className={`crest ${sizeClass} ${className}`} aria-label={club.name} title={club.name}>
+      <svg className="crest-svg" viewBox="0 0 100 112" aria-hidden="true">
+        <defs>
+          <linearGradient id={gradientId} x1="0" y1="0" x2="0.35" y2="1">
+            <stop offset="0%" stopColor={shade(primary, 0.14)} />
+            <stop offset="100%" stopColor={shade(primary, -0.34)} />
+          </linearGradient>
+          <clipPath id={clipId}>
+            <path d={SHIELD_PATH} />
+          </clipPath>
+        </defs>
+        <path d={SHIELD_PATH} fill={`url(#${gradientId})`} />
+        <g clipPath={`url(#${clipId})`}>
+          <path d="M-10 84 L86 -12 L108 -12 L12 84 Z" fill={secondary} opacity="0.95" />
+          <path d="M-10 84 L86 -12" fill="none" stroke={accent} strokeWidth="3.5" />
+          <path d="M12 84 L108 -12" fill="none" stroke={accent} strokeWidth="3.5" />
+          <path d="M0 3 H100 V16 H0 Z" fill="#ffffff" opacity="0.12" />
+        </g>
+        <path d={SHIELD_PATH} fill="none" stroke="rgba(2,8,20,0.5)" strokeWidth="2.4" />
+        <path d={SHIELD_PATH} fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1" transform="translate(1.6 1.6) scale(0.968)" />
+      </svg>
+      <span className="crest-letter" style={{ color: isLight(primary) ? "#0b1220" : "#ffffff" }}>
+        {club.short.slice(0, 3)}
+      </span>
     </span>
   );
 }

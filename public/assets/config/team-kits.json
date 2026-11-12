@@ -1,0 +1,3188 @@
+{
+  "generatedFrom": "src/game/data/{clubs,countries}.ts + appearance.ts (hash/PATTERNS)",
+  "dark": "#0b1220",
+  "light": "#f8fafc",
+  "patterns": [
+    "solid",
+    "stripes",
+    "halves",
+    "sash",
+    "hoops"
+  ],
+  "clubs": [
+    {
+      "id": "atl-lisboa",
+      "name": "Atlético Lisboa",
+      "short": "ATL",
+      "city": "Lisboa",
+      "league": "por1",
+      "colors": {
+        "primary": "#c8102e",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "halves",
+          "primary": "#c8102e",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#c8102e",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#c8102e",
+          "shorts": "#c8102e",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f59e0b",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f59e0b",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "porto-atl",
+      "name": "Porto Atlântico",
+      "short": "POR",
+      "city": "Porto",
+      "league": "por1",
+      "colors": {
+        "primary": "#1e40af",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "sash",
+          "primary": "#1e40af",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#c084fc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#c084fc",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "real-sintra",
+      "name": "Real Sintra",
+      "short": "SIN",
+      "city": "Sintra",
+      "league": "por1",
+      "colors": {
+        "primary": "#6d28d9",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#6d28d9",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#6d28d9",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#6d28d9",
+          "shorts": "#6d28d9",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "braga-uniao",
+      "name": "Braga União",
+      "short": "BRA",
+      "city": "Braga",
+      "league": "por1",
+      "colors": {
+        "primary": "#dc2626",
+        "secondary": "#f8fafc",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#dc2626",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "tejo-fc",
+      "name": "Clube do Tejo",
+      "short": "TEJ",
+      "city": "Lisboa",
+      "league": "por1",
+      "colors": {
+        "primary": "#0f766e",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "halves",
+          "primary": "#0f766e",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#0f766e",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#0f766e",
+          "shorts": "#0f766e",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f59e0b",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f59e0b",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "vitoriano",
+      "name": "Vitoriano FC",
+      "short": "VIT",
+      "city": "Setúbal",
+      "league": "por1",
+      "colors": {
+        "primary": "#065f46",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "sash",
+          "primary": "#065f46",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#065f46",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#065f46",
+          "shorts": "#065f46",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#c084fc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#c084fc",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "acad-norte",
+      "name": "Académica do Norte",
+      "short": "ACN",
+      "city": "Coimbra",
+      "league": "por1",
+      "colors": {
+        "primary": "#111827",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#111827",
+          "shorts": "#111827",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "estrela-alg",
+      "name": "Estrela do Algarve",
+      "short": "EAL",
+      "city": "Faro",
+      "league": "por1",
+      "colors": {
+        "primary": "#7c2d12",
+        "secondary": "#fde68a",
+        "accent": "#0f172a"
+      },
+      "kits": {
+        "home": {
+          "pattern": "sash",
+          "primary": "#7c2d12",
+          "secondary": "#fde68a",
+          "shorts": "#fde68a",
+          "socks": "#7c2d12",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#fde68a",
+          "secondary": "#7c2d12",
+          "shorts": "#7c2d12",
+          "socks": "#fde68a",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#0f172a",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#0f172a",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#c084fc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#c084fc",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "leca-atl",
+      "name": "Leça Atlético",
+      "short": "LEC",
+      "city": "Matosinhos",
+      "league": "por1",
+      "colors": {
+        "primary": "#1d4ed8",
+        "secondary": "#f8fafc",
+        "accent": "#f97316"
+      },
+      "kits": {
+        "home": {
+          "pattern": "hoops",
+          "primary": "#1d4ed8",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#1d4ed8",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#1d4ed8",
+          "shorts": "#1d4ed8",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f97316",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#f97316",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f472b6",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f472b6",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "maritimo-ins",
+      "name": "Marítimo Insular",
+      "short": "MAR",
+      "city": "Funchal",
+      "league": "por1",
+      "colors": {
+        "primary": "#065f46",
+        "secondary": "#dc2626",
+        "accent": "#f8fafc"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#065f46",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#065f46",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#dc2626",
+          "secondary": "#065f46",
+          "shorts": "#065f46",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f8fafc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "beiras-cd",
+      "name": "CD das Beiras",
+      "short": "BEI",
+      "city": "Viseu",
+      "league": "por2",
+      "colors": {
+        "primary": "#166534",
+        "secondary": "#f8fafc",
+        "accent": "#facc15"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#166534",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#166534",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#166534",
+          "shorts": "#166534",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#facc15",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "alentejo-fc",
+      "name": "Alentejo FC",
+      "short": "ALE",
+      "city": "Évora",
+      "league": "por2",
+      "colors": {
+        "primary": "#7f1d1d",
+        "secondary": "#f8fafc",
+        "accent": "#facc15"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#7f1d1d",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#7f1d1d",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#7f1d1d",
+          "shorts": "#7f1d1d",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#facc15",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "ribatejo-sp",
+      "name": "Ribatejo Sport",
+      "short": "RIB",
+      "city": "Santarém",
+      "league": "por2",
+      "colors": {
+        "primary": "#0c4a6e",
+        "secondary": "#f8fafc",
+        "accent": "#38bdf8"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#0c4a6e",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#0c4a6e",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#0c4a6e",
+          "shorts": "#0c4a6e",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#38bdf8",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#38bdf8",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "aveiro-nau",
+      "name": "Aveiro Náutico",
+      "short": "AVE",
+      "city": "Aveiro",
+      "league": "por2",
+      "colors": {
+        "primary": "#0284c7",
+        "secondary": "#f8fafc",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#0284c7",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#0284c7",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#0284c7",
+          "shorts": "#0284c7",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "coimbra-univ",
+      "name": "Coimbra Universitário",
+      "short": "CUN",
+      "city": "Coimbra",
+      "league": "por2",
+      "colors": {
+        "primary": "#111827",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "hoops",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#111827",
+          "shorts": "#111827",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f472b6",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f472b6",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "guimaraes-real",
+      "name": "Guimarães Real",
+      "short": "GUI",
+      "city": "Guimarães",
+      "league": "por2",
+      "colors": {
+        "primary": "#f8fafc",
+        "secondary": "#1e40af",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "sash",
+          "primary": "#f8fafc",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#1e40af",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#c084fc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#c084fc",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "fafe-atl",
+      "name": "Fafe Atlético",
+      "short": "FAF",
+      "city": "Fafe",
+      "league": "por2",
+      "colors": {
+        "primary": "#b91c1c",
+        "secondary": "#f8fafc",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#b91c1c",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#b91c1c",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#b91c1c",
+          "shorts": "#b91c1c",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "viseu-fc",
+      "name": "Viseu FC",
+      "short": "VIS",
+      "city": "Viseu",
+      "league": "por2",
+      "colors": {
+        "primary": "#ca8a04",
+        "secondary": "#111827",
+        "accent": "#f8fafc"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#ca8a04",
+          "secondary": "#111827",
+          "shorts": "#111827",
+          "socks": "#ca8a04",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#111827",
+          "secondary": "#ca8a04",
+          "shorts": "#ca8a04",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f8fafc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "portimao-mar",
+      "name": "Portimão Mar",
+      "short": "PTM",
+      "city": "Portimão",
+      "league": "por2",
+      "colors": {
+        "primary": "#0891b2",
+        "secondary": "#f8fafc",
+        "accent": "#facc15"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#0891b2",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#0891b2",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#0891b2",
+          "shorts": "#0891b2",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#facc15",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "setubal-costa",
+      "name": "Setúbal Costa",
+      "short": "SET",
+      "city": "Setúbal",
+      "league": "por2",
+      "colors": {
+        "primary": "#15803d",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#15803d",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#15803d",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#15803d",
+          "shorts": "#15803d",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "acad-futuro",
+      "name": "Academia do Futuro",
+      "short": "AFU",
+      "city": "Lisboa",
+      "league": "por3",
+      "colors": {
+        "primary": "#0f766e",
+        "secondary": "#f8fafc",
+        "accent": "#facc15"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#0f766e",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#0f766e",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#0f766e",
+          "shorts": "#0f766e",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#facc15",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "escola-talentos",
+      "name": "Escola de Talentos",
+      "short": "ETA",
+      "city": "Porto",
+      "league": "por3",
+      "colors": {
+        "primary": "#7c3aed",
+        "secondary": "#f8fafc",
+        "accent": "#facc15"
+      },
+      "kits": {
+        "home": {
+          "pattern": "hoops",
+          "primary": "#7c3aed",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#7c3aed",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#7c3aed",
+          "shorts": "#7c3aed",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#facc15",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f472b6",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f472b6",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "gd-bairro",
+      "name": "GD Bairro Alto",
+      "short": "BAI",
+      "city": "Lisboa",
+      "league": "por3",
+      "colors": {
+        "primary": "#b91c1c",
+        "secondary": "#f8fafc",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#b91c1c",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#b91c1c",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#b91c1c",
+          "shorts": "#b91c1c",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "lusitano-juv",
+      "name": "Lusitano Juvenil",
+      "short": "LUS",
+      "city": "Leiria",
+      "league": "por3",
+      "colors": {
+        "primary": "#166534",
+        "secondary": "#facc15",
+        "accent": "#f8fafc"
+      },
+      "kits": {
+        "home": {
+          "pattern": "sash",
+          "primary": "#166534",
+          "secondary": "#facc15",
+          "shorts": "#facc15",
+          "socks": "#166534",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#facc15",
+          "secondary": "#166534",
+          "shorts": "#166534",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f8fafc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#c084fc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#c084fc",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "seixal-form",
+      "name": "Seixal Formação",
+      "short": "SEI",
+      "city": "Seixal",
+      "league": "por3",
+      "colors": {
+        "primary": "#1d4ed8",
+        "secondary": "#f8fafc",
+        "accent": "#facc15"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#1d4ed8",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#1d4ed8",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#1d4ed8",
+          "shorts": "#1d4ed8",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#facc15",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "minho-academy",
+      "name": "Minho Academy",
+      "short": "MIN",
+      "city": "Braga",
+      "league": "por3",
+      "colors": {
+        "primary": "#0e7490",
+        "secondary": "#ffffff",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#0e7490",
+          "secondary": "#ffffff",
+          "shorts": "#ffffff",
+          "socks": "#0e7490",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#ffffff",
+          "secondary": "#0e7490",
+          "shorts": "#0e7490",
+          "socks": "#ffffff",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "estoril-form",
+      "name": "Estoril Formação",
+      "short": "EST",
+      "city": "Estoril",
+      "league": "por3",
+      "colors": {
+        "primary": "#facc15",
+        "secondary": "#1e3a8a",
+        "accent": "#ffffff"
+      },
+      "kits": {
+        "home": {
+          "pattern": "sash",
+          "primary": "#facc15",
+          "secondary": "#1e3a8a",
+          "shorts": "#1e3a8a",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#1e3a8a",
+          "secondary": "#facc15",
+          "shorts": "#facc15",
+          "socks": "#1e3a8a",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#ffffff",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#ffffff",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#c084fc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#c084fc",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "olhao-sc",
+      "name": "Olhão SC",
+      "short": "OLH",
+      "city": "Olhão",
+      "league": "por3",
+      "colors": {
+        "primary": "#0f766e",
+        "secondary": "#f8fafc",
+        "accent": "#f97316"
+      },
+      "kits": {
+        "home": {
+          "pattern": "halves",
+          "primary": "#0f766e",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#0f766e",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#0f766e",
+          "shorts": "#0f766e",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f97316",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#f97316",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f59e0b",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f59e0b",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "beira-acad",
+      "name": "Beira Academia",
+      "short": "BEA",
+      "city": "Covilhã",
+      "league": "por3",
+      "colors": {
+        "primary": "#7f1d1d",
+        "secondary": "#f8fafc",
+        "accent": "#facc15"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#7f1d1d",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#7f1d1d",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#7f1d1d",
+          "shorts": "#7f1d1d",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#facc15",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "nova-sintra",
+      "name": "Nova Sintra",
+      "short": "NSI",
+      "city": "Sintra",
+      "league": "por3",
+      "colors": {
+        "primary": "#4338ca",
+        "secondary": "#f8fafc",
+        "accent": "#facc15"
+      },
+      "kits": {
+        "home": {
+          "pattern": "hoops",
+          "primary": "#4338ca",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#4338ca",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#4338ca",
+          "shorts": "#4338ca",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#facc15",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f472b6",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f472b6",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "london-ath",
+      "name": "London Athletic",
+      "short": "LON",
+      "city": "London",
+      "league": "eng1",
+      "colors": {
+        "primary": "#1e40af",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#1e40af",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "manchester-reds",
+      "name": "Manchester Reds",
+      "short": "MAN",
+      "city": "Manchester",
+      "league": "eng1",
+      "colors": {
+        "primary": "#dc2626",
+        "secondary": "#f8fafc",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#dc2626",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "mersey-fc",
+      "name": "Mersey FC",
+      "short": "MER",
+      "city": "Liverpool",
+      "league": "eng1",
+      "colors": {
+        "primary": "#0ea5e9",
+        "secondary": "#f8fafc",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#0ea5e9",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#0ea5e9",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#0ea5e9",
+          "shorts": "#0ea5e9",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "thames-rovers",
+      "name": "Thames Rovers",
+      "short": "THA",
+      "city": "London",
+      "league": "eng1",
+      "colors": {
+        "primary": "#f8fafc",
+        "secondary": "#111827",
+        "accent": "#dc2626"
+      },
+      "kits": {
+        "home": {
+          "pattern": "halves",
+          "primary": "#f8fafc",
+          "secondary": "#111827",
+          "shorts": "#111827",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#dc2626",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f59e0b",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f59e0b",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "newcastle-north",
+      "name": "Newcastle North",
+      "short": "NEW",
+      "city": "Newcastle",
+      "league": "eng1",
+      "colors": {
+        "primary": "#111827",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#111827",
+          "shorts": "#111827",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "yorkshire-utd",
+      "name": "Yorkshire United",
+      "short": "YOR",
+      "city": "Leeds",
+      "league": "eng1",
+      "colors": {
+        "primary": "#f8fafc",
+        "secondary": "#1e40af",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#f8fafc",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#1e40af",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "midlands-fc",
+      "name": "Midlands FC",
+      "short": "MID",
+      "city": "Birmingham",
+      "league": "eng1",
+      "colors": {
+        "primary": "#7c3aed",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#7c3aed",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#7c3aed",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#7c3aed",
+          "shorts": "#7c3aed",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "brighton-coast",
+      "name": "Brighton Coast",
+      "short": "BRI",
+      "city": "Brighton",
+      "league": "eng1",
+      "colors": {
+        "primary": "#0ea5e9",
+        "secondary": "#f8fafc",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "halves",
+          "primary": "#0ea5e9",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#0ea5e9",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#0ea5e9",
+          "shorts": "#0ea5e9",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f59e0b",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f59e0b",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "bristol-harb",
+      "name": "Bristol Harbour",
+      "short": "BRS",
+      "city": "Bristol",
+      "league": "eng1",
+      "colors": {
+        "primary": "#dc2626",
+        "secondary": "#f8fafc",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "halves",
+          "primary": "#dc2626",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f59e0b",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f59e0b",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "leeds-white",
+      "name": "Leeds White",
+      "short": "LEE",
+      "city": "Leeds",
+      "league": "eng1",
+      "colors": {
+        "primary": "#f8fafc",
+        "secondary": "#111827",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#111827",
+          "shorts": "#111827",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#22d3ee",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#22d3ee",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "madrid-blanco",
+      "name": "Madrid Blanco",
+      "short": "MAD",
+      "city": "Madrid",
+      "league": "esp1",
+      "colors": {
+        "primary": "#f8fafc",
+        "secondary": "#f5c451",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#111827",
+          "secondary": "#f5c451",
+          "shorts": "#f5c451",
+          "socks": "#f8fafc",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#f5c451",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "barcelona-blau",
+      "name": "Barcelona Blau",
+      "short": "BAR",
+      "city": "Barcelona",
+      "league": "esp1",
+      "colors": {
+        "primary": "#1e40af",
+        "secondary": "#dc2626",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "sash",
+          "primary": "#1e40af",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#dc2626",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#c084fc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#c084fc",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "sevilla-sur",
+      "name": "Sevilla Sur",
+      "short": "SEV",
+      "city": "Sevilla",
+      "league": "esp1",
+      "colors": {
+        "primary": "#f8fafc",
+        "secondary": "#dc2626",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "hoops",
+          "primary": "#f8fafc",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#dc2626",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f472b6",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f472b6",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "atletico-rojo",
+      "name": "Atlético Rojo",
+      "short": "ATR",
+      "city": "Madrid",
+      "league": "esp1",
+      "colors": {
+        "primary": "#dc2626",
+        "secondary": "#f8fafc",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "hoops",
+          "primary": "#dc2626",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f472b6",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f472b6",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "valencia-nar",
+      "name": "Valencia Naranja",
+      "short": "VAL",
+      "city": "Valencia",
+      "league": "esp1",
+      "colors": {
+        "primary": "#f97316",
+        "secondary": "#111827",
+        "accent": "#f8fafc"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#f97316",
+          "secondary": "#111827",
+          "shorts": "#111827",
+          "socks": "#f97316",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#111827",
+          "secondary": "#f97316",
+          "shorts": "#f97316",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f8fafc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "bilbao-norte",
+      "name": "Bilbao Norte",
+      "short": "BIL",
+      "city": "Bilbao",
+      "league": "esp1",
+      "colors": {
+        "primary": "#dc2626",
+        "secondary": "#f8fafc",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "halves",
+          "primary": "#dc2626",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f59e0b",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f59e0b",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "villarreal-am",
+      "name": "Villarreal Amarillo",
+      "short": "VIL",
+      "city": "Villarreal",
+      "league": "esp1",
+      "colors": {
+        "primary": "#facc15",
+        "secondary": "#1e40af",
+        "accent": "#f8fafc"
+      },
+      "kits": {
+        "home": {
+          "pattern": "halves",
+          "primary": "#facc15",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#1e40af",
+          "secondary": "#facc15",
+          "shorts": "#facc15",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f8fafc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f59e0b",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f59e0b",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "sociedad-real",
+      "name": "Sociedad Real",
+      "short": "SOC",
+      "city": "San Sebastián",
+      "league": "esp1",
+      "colors": {
+        "primary": "#1e40af",
+        "secondary": "#f8fafc",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#1e40af",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f8fafc",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#a3e635",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#a3e635",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "girona-costa",
+      "name": "Girona Costa",
+      "short": "GIR",
+      "city": "Girona",
+      "league": "esp1",
+      "colors": {
+        "primary": "#f8fafc",
+        "secondary": "#dc2626",
+        "accent": "#f5c451"
+      },
+      "kits": {
+        "home": {
+          "pattern": "sash",
+          "primary": "#f8fafc",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#dc2626",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#f5c451",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f5c451",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#c084fc",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#c084fc",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "id": "zaragoza-leon",
+      "name": "Zaragoza León",
+      "short": "ZAR",
+      "city": "Zaragoza",
+      "league": "esp1",
+      "colors": {
+        "primary": "#f8fafc",
+        "secondary": "#1e40af",
+        "accent": "#111827"
+      },
+      "kits": {
+        "home": {
+          "pattern": "hoops",
+          "primary": "#f8fafc",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#f8fafc",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "stripes",
+          "primary": "#1e40af",
+          "secondary": "#f8fafc",
+          "shorts": "#f8fafc",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "third": {
+          "pattern": "sash",
+          "primary": "#111827",
+          "secondary": "#f8fafc",
+          "shorts": "#0b1220",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "gk": {
+          "pattern": "solid",
+          "primary": "#f472b6",
+          "secondary": "#0b1220",
+          "shorts": "#0b1220",
+          "socks": "#f472b6",
+          "trim": "#f8fafc",
+          "number": "#0b1220"
+        }
+      }
+    }
+  ],
+  "nations": [
+    {
+      "code": "POR",
+      "name": "Portugal",
+      "colors": [
+        "#c8102e",
+        "#046a38"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#c8102e",
+          "secondary": "#046a38",
+          "shorts": "#046a38",
+          "socks": "#c8102e",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#046a38",
+          "secondary": "#c8102e",
+          "shorts": "#c8102e",
+          "socks": "#046a38",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        }
+      }
+    },
+    {
+      "code": "BRA",
+      "name": "Brasil",
+      "colors": [
+        "#ffd93b",
+        "#009c3b"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#ffd93b",
+          "secondary": "#009c3b",
+          "shorts": "#009c3b",
+          "socks": "#ffd93b",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#009c3b",
+          "secondary": "#ffd93b",
+          "shorts": "#ffd93b",
+          "socks": "#009c3b",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        }
+      }
+    },
+    {
+      "code": "ESP",
+      "name": "Espanha",
+      "colors": [
+        "#c60b1e",
+        "#f1bf00"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#c60b1e",
+          "secondary": "#f1bf00",
+          "shorts": "#f1bf00",
+          "socks": "#c60b1e",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#f1bf00",
+          "secondary": "#c60b1e",
+          "shorts": "#c60b1e",
+          "socks": "#f1bf00",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "ENG",
+      "name": "Inglaterra",
+      "colors": [
+        "#ffffff",
+        "#cf142b"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#ffffff",
+          "secondary": "#cf142b",
+          "shorts": "#cf142b",
+          "socks": "#ffffff",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#cf142b",
+          "secondary": "#ffffff",
+          "shorts": "#ffffff",
+          "socks": "#cf142b",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        }
+      }
+    },
+    {
+      "code": "FRA",
+      "name": "França",
+      "colors": [
+        "#1e3a8a",
+        "#ffffff"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#1e3a8a",
+          "secondary": "#ffffff",
+          "shorts": "#ffffff",
+          "socks": "#1e3a8a",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#ffffff",
+          "secondary": "#1e3a8a",
+          "shorts": "#1e3a8a",
+          "socks": "#ffffff",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "ITA",
+      "name": "Itália",
+      "colors": [
+        "#1e40af",
+        "#ffffff"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#1e40af",
+          "secondary": "#ffffff",
+          "shorts": "#ffffff",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#ffffff",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#ffffff",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "GER",
+      "name": "Alemanha",
+      "colors": [
+        "#111827",
+        "#fbbf24"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#111827",
+          "secondary": "#fbbf24",
+          "shorts": "#fbbf24",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#fbbf24",
+          "secondary": "#111827",
+          "shorts": "#111827",
+          "socks": "#fbbf24",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "ARG",
+      "name": "Argentina",
+      "colors": [
+        "#6cb4ee",
+        "#ffffff"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#6cb4ee",
+          "secondary": "#ffffff",
+          "shorts": "#ffffff",
+          "socks": "#6cb4ee",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#ffffff",
+          "secondary": "#6cb4ee",
+          "shorts": "#6cb4ee",
+          "socks": "#ffffff",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "URU",
+      "name": "Uruguai",
+      "colors": [
+        "#5dade2",
+        "#ffffff"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#5dade2",
+          "secondary": "#ffffff",
+          "shorts": "#ffffff",
+          "socks": "#5dade2",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#ffffff",
+          "secondary": "#5dade2",
+          "shorts": "#5dade2",
+          "socks": "#ffffff",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "COL",
+      "name": "Colômbia",
+      "colors": [
+        "#fcd116",
+        "#003893"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#fcd116",
+          "secondary": "#003893",
+          "shorts": "#003893",
+          "socks": "#fcd116",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#003893",
+          "secondary": "#fcd116",
+          "shorts": "#fcd116",
+          "socks": "#003893",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        }
+      }
+    },
+    {
+      "code": "BEL",
+      "name": "Bélgica",
+      "colors": [
+        "#111827",
+        "#ef4444"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#111827",
+          "secondary": "#ef4444",
+          "shorts": "#ef4444",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#ef4444",
+          "secondary": "#111827",
+          "shorts": "#111827",
+          "socks": "#ef4444",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        }
+      }
+    },
+    {
+      "code": "NED",
+      "name": "Holanda",
+      "colors": [
+        "#f97316",
+        "#111827"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#f97316",
+          "secondary": "#111827",
+          "shorts": "#111827",
+          "socks": "#f97316",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#111827",
+          "secondary": "#f97316",
+          "shorts": "#f97316",
+          "socks": "#111827",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        }
+      }
+    },
+    {
+      "code": "CRO",
+      "name": "Croácia",
+      "colors": [
+        "#ef4444",
+        "#ffffff"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#ef4444",
+          "secondary": "#ffffff",
+          "shorts": "#ffffff",
+          "socks": "#ef4444",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#ffffff",
+          "secondary": "#ef4444",
+          "shorts": "#ef4444",
+          "socks": "#ffffff",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "SRB",
+      "name": "Sérvia",
+      "colors": [
+        "#dc2626",
+        "#1e40af"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#dc2626",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#1e40af",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        }
+      }
+    },
+    {
+      "code": "NGA",
+      "name": "Nigéria",
+      "colors": [
+        "#16a34a",
+        "#ffffff"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#16a34a",
+          "secondary": "#ffffff",
+          "shorts": "#ffffff",
+          "socks": "#16a34a",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#ffffff",
+          "secondary": "#16a34a",
+          "shorts": "#16a34a",
+          "socks": "#ffffff",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "GHA",
+      "name": "Gana",
+      "colors": [
+        "#dc2626",
+        "#facc15"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#dc2626",
+          "secondary": "#facc15",
+          "shorts": "#facc15",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#facc15",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "SEN",
+      "name": "Senegal",
+      "colors": [
+        "#16a34a",
+        "#facc15"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#16a34a",
+          "secondary": "#facc15",
+          "shorts": "#facc15",
+          "socks": "#16a34a",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#facc15",
+          "secondary": "#16a34a",
+          "shorts": "#16a34a",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "MAR",
+      "name": "Marrocos",
+      "colors": [
+        "#dc2626",
+        "#16a34a"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#dc2626",
+          "secondary": "#16a34a",
+          "shorts": "#16a34a",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#16a34a",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#16a34a",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        }
+      }
+    },
+    {
+      "code": "JPN",
+      "name": "Japão",
+      "colors": [
+        "#1e40af",
+        "#ffffff"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#1e40af",
+          "secondary": "#ffffff",
+          "shorts": "#ffffff",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#ffffff",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#ffffff",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "USA",
+      "name": "Estados Unidos",
+      "colors": [
+        "#1e40af",
+        "#dc2626"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#1e40af",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#1e40af",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#dc2626",
+          "secondary": "#1e40af",
+          "shorts": "#1e40af",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        }
+      }
+    },
+    {
+      "code": "MEX",
+      "name": "México",
+      "colors": [
+        "#16a34a",
+        "#dc2626"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#16a34a",
+          "secondary": "#dc2626",
+          "shorts": "#dc2626",
+          "socks": "#16a34a",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#dc2626",
+          "secondary": "#16a34a",
+          "shorts": "#16a34a",
+          "socks": "#dc2626",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        }
+      }
+    },
+    {
+      "code": "NOR",
+      "name": "Noruega",
+      "colors": [
+        "#b91c1c",
+        "#1e3a8a"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#b91c1c",
+          "secondary": "#1e3a8a",
+          "shorts": "#1e3a8a",
+          "socks": "#b91c1c",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#1e3a8a",
+          "secondary": "#b91c1c",
+          "shorts": "#b91c1c",
+          "socks": "#1e3a8a",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        }
+      }
+    },
+    {
+      "code": "SWE",
+      "name": "Suécia",
+      "colors": [
+        "#2563eb",
+        "#facc15"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#2563eb",
+          "secondary": "#facc15",
+          "shorts": "#facc15",
+          "socks": "#2563eb",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#facc15",
+          "secondary": "#2563eb",
+          "shorts": "#2563eb",
+          "socks": "#facc15",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    },
+    {
+      "code": "DEN",
+      "name": "Dinamarca",
+      "colors": [
+        "#b91c1c",
+        "#ffffff"
+      ],
+      "kits": {
+        "home": {
+          "pattern": "stripes",
+          "primary": "#b91c1c",
+          "secondary": "#ffffff",
+          "shorts": "#ffffff",
+          "socks": "#b91c1c",
+          "trim": "#f8fafc",
+          "number": "#f8fafc"
+        },
+        "away": {
+          "pattern": "solid",
+          "primary": "#ffffff",
+          "secondary": "#b91c1c",
+          "shorts": "#b91c1c",
+          "socks": "#ffffff",
+          "trim": "#0b1220",
+          "number": "#0b1220"
+        }
+      }
+    }
+  ]
+}

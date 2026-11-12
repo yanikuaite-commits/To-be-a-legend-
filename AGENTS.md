@@ -120,3 +120,24 @@ Para publicar: `git tag vX.Y.Z && git push origin vX.Y.Z`.
   em `~/.config/godot/editor_settings-4.3.tres`. Nesta imagem o Godot não tem
   KVM nem emulador, por isso o APK só se valida por inspeção (`apksigner`,
   `aapt`), não a correr.
+
+## Uniformes e mapa de cores
+
+Os sprites de partida (`public/assets/animations/*.png`) são **neutros**: cinzento
+`#2e2e32` para a roupa e tons de pele. Não têm cor de clube nenhuma, por isso um
+único jogo de sheets serve todas as equipas e as transferências não partem os
+uniformes. A cor é aplicada em runtime.
+
+- `kitForClub()` / `kitForNational()` em `src/game/data/appearance.ts` derivam o
+  uniforme (camisola, detalhe, calções, meias, gola, número) das cores do clube.
+  O padrão (`solid|stripes|halves|sash|hoops`) sai de `hash(club.id) % 5` — é
+  determinístico, o mesmo clube dá sempre o mesmo padrão.
+- Em partida, `setup.ts` troca para `away`/`third` quando as camisolas das duas
+  equipas ficam demasiado parecidas (`colorDistance`).
+- `npm run colors:export` regenera `public/assets/config/team-kits.json` (dados
+  completos, incl. `away`/`third`/`gk`) e `docs/mapa-de-cores.md` a partir do
+  código. O script replica `hash`/`PATTERNS` e foi validado contra `kitForClub`
+  para os 50 clubes — se mexeres na derivação, corre-o outra vez.
+- Escudos: `Crest` em `src/components/ui.tsx` é um SVG (escudo com faixa diagonal,
+  gradiente e contorno) que usa `primary`/`secondary`/`accent` do clube. O CSS
+  está em `src/index.css` (`.crest`, `.crest-svg`, `.crest-letter`).
