@@ -143,7 +143,7 @@ func _draw_stadium_edge() -> void:
 	draw_polyline(edge, Color("#263847"), maxf(1.0, engine.camera_scale * 0.10), true)
 	# Crowd flecks outside the boards.
 	for i in 46:
-		var x := -PITCH_HALF_L - 5.0 + (i * 71.0) % (PITCH_HALF_L * 2.0 + 10.0)
+		var x := -PITCH_HALF_L - 5.0 + fmod(i * 71.0, PITCH_HALF_L * 2.0 + 10.0)
 		var y := -PITCH_HALF_W - 5.5 if i % 2 == 0 else PITCH_HALF_W + 5.5
 		var pos := engine.project(x, y)
 		draw_circle(pos, 2.2, Color(0.50, 0.60, 0.68, 0.28))
