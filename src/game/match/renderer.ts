@@ -4,6 +4,13 @@ const SPRITE_W = 256;
 const SPRITE_H = 512;
 const SPRITE_FEET_Y = 500;
 const GOAL_DEPTH = 4.6;
+
+/**
+ * Os spritesheets atuais são neutros (cinzento + pele), por isso a cor do clube
+ * é pintada por cima em runtime. Quando os sprites já vierem com o uniforme
+ * desenhado, pôr em `false` para o jogo deixar de pintar a camisola por cima.
+ */
+const PAINT_KIT_OVER_ANIMATION = true;
 // Deliberately taller than life: the chibi players have oversized heads, and the
 // goal needs to read like a real, imposing goal behind them.
 const GOAL_FRAME_HEIGHT = 3.6;
@@ -496,7 +503,7 @@ function drawPlayer(
     ctx.translate(-displayWidth / 2, -h * (SPRITE_FEET_Y / SPRITE_H));
     ctx.scale(displayWidth / SPRITE_W, h / SPRITE_H);
     ctx.drawImage(animated.frame, 0, 0);
-    drawAnimatedKit(ctx, p);
+    if (PAINT_KIT_OVER_ANIMATION) drawAnimatedKit(ctx, p);
     ctx.restore();
   } else if (sprite && rig && p.slideTimer <= 0) {
     const heightScale = 1 + (p.appearance.height ?? 0) * 0.035;
