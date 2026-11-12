@@ -5,15 +5,11 @@ clube, escolher casa/fora, guarda-redes) é código e eu trato.
 
 ## A ideia em uma frase
 
-Pintas a roupa nas 106 poses que **já existem**, usando **4 cores-chave**. O
-jogo troca essas 4 cores pela paleta do clube. Resultado: as 74 equipas ficam
-com uniforme próprio sem desenhares 74 jogos de sprites.
+Pintas a roupa nas 106 poses que **já existem**, usando **4 cores combinadas**
+(cores-chave). O jogo troca essas 4 cores pela paleta do clube. Resultado: as 74
+equipas ficam com uniforme próprio sem desenhares 74 jogos de sprites.
 
 Ver `template-uniformes.png` (onde pintar) e `fluxo-uniformes.png` (o resultado).
-
-Implementação: `src/game/match/kit-recolor.ts`. A troca de cores é automática —
-basta os sprites passarem a ter as cores-chave e a pintura antiga por cima
-desliga-se sozinha (`kitHasKeyColors`).
 
 ## As 4 cores-chave
 
