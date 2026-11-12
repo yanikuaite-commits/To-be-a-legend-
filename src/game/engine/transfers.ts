@@ -1,7 +1,7 @@
 import { CLUBS, LEAGUE_MAP, getClub } from "../data/clubs";
 import { countryName } from "../data/countries";
 import type { Career, TransferOffer } from "../types";
-import { clamp, pick, randInt, shuffle, type Rand } from "./rng";
+import { clamp, mulberry32, pick, randInt, shuffle, type Rand } from "./rng";
 import { addNews, cloneCareer, uid } from "./careerUtils";
 import { marketValue, suggestedSalary } from "./attributes";
 
@@ -204,14 +204,16 @@ export function negotiateOffer(
   offerId: string,
 ): { career: Career; ok: boolean; message: string } {
   const career = cloneCareer(careerInput);
-  const offer = career.offers.find((o) => o.id === offerId);
+  const offerIndex = career.offers.findIndex((o) => o.id === offerId);
+  const offer = offerIndex >= 0 ? career.offers[offerIndex] : undefined;
   if (!offer) return { career, ok: false, message: "Proposta indisponível." };
   if (offer.negotiated) return { career, ok: false, message: "Já negociaste esta proposta." };
   const successChance = clamp(0.42 + career.reputation / 260 + offer.interest / 400, 0.2, 0.9);
   offer.negotiated = true;
-  if (Math.random() < successChance) {
-    offer.salary = Math.round(offer.salary * (1.12 + Math.random() * 0.15));
-    offer.years = Math.max(2, offer.years + (Math.random() < 0.35 ? 1 : 0));
+  const rand = mulberry32(career.seed + career.season * 101 + career.week * 37 + offerIndex * 17);
+  if (rand() < successChance) {
+    offer.salary = Math.round(offer.salary * (1.12 + rand() * 0.15));
+    offer.years = Math.max(2, offer.years + (rand() < 0.35 ? 1 : 0));
     offer.interest = clamp(offer.interest + 4, 0, 99);
     return { career, ok: true, message: `O clube melhorou a proposta: €${offer.salary.toLocaleString("pt-PT")}/semana.` };
   }

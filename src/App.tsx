@@ -53,6 +53,7 @@ export default function App() {
   const [reportOpen, setReportOpen] = useState(false);
   const [seasonOpen, setSeasonOpen] = useState(false);
   const toastTimer = useRef<number | null>(null);
+  const seasonTimer = useRef<number | null>(null);
 
   const notify = useCallback((message: string) => {
     setToast(message);
@@ -62,6 +63,7 @@ export default function App() {
 
   useEffect(() => () => {
     if (toastTimer.current) window.clearTimeout(toastTimer.current);
+    if (seasonTimer.current) window.clearTimeout(seasonTimer.current);
   }, []);
 
   const refreshSaves = useCallback(() => {
@@ -188,7 +190,8 @@ export default function App() {
       notify(`Semana ${result.career.week} · ${result.career.seasonLabel}`);
     }
     if (result.retired) {
-      setTimeout(() => setSeasonOpen(true), 80);
+      if (seasonTimer.current) window.clearTimeout(seasonTimer.current);
+      seasonTimer.current = window.setTimeout(() => setSeasonOpen(true), 80);
     }
   }, [notify]);
 

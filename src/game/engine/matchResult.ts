@@ -226,7 +226,8 @@ export function applyMatchResult(careerInput: Career, report: MatchReport): Care
         });
       }
     }
-    if (report.playerMinutes > 25 && Math.random() < 0.018 + (career.energy < 35 ? 0.02 : 0)) {
+    const injuryRand = mulberry32(career.seed + career.week * 53 + career.season * 29 + fixture.id.length * 11);
+    if (report.playerMinutes > 25 && injuryRand() < 0.018 + (career.energy < 35 ? 0.02 : 0)) {
       career.injuryWeeks = Math.max(career.injuryWeeks, randIntSafe(career, 1, 3));
       addNews(career, {
         title: "Lesão no jogo",

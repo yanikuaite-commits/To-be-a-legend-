@@ -116,7 +116,7 @@ export function CareerDashboard({
   const opponentName = displayFixture?.opponentShort ?? "";
   const playerHome = displayFixture?.home ?? true;
   const today = careerDate(career);
-  const winRate = career.stats.apps ? Math.round((career.stats.goals / career.stats.apps) * 100) : 0;
+  const goalsPerGame = career.stats.apps ? career.stats.goals / career.stats.apps : 0;
 
   const tiles: {
     key: PanelKey; icon: LucideIcon; title: string; value: string; badge?: string; feature?: boolean;
@@ -362,7 +362,7 @@ export function CareerDashboard({
             <div className="offer-stat"><div className="os-l">Jogos</div><div className="os-v">{career.seasonStats.apps}</div></div>
             <div className="offer-stat"><div className="os-l">Golos</div><div className="os-v">{career.seasonStats.goals}</div></div>
             <div className="offer-stat"><div className="os-l">Assistências</div><div className="os-v">{career.seasonStats.assists}</div></div>
-            <div className="offer-stat"><div className="os-l">Golos/jogo</div><div className="os-v">{(winRate / 100).toFixed(2)}</div></div>
+            <div className="offer-stat"><div className="os-l">Golos/jogo</div><div className="os-v">{goalsPerGame.toFixed(2)}</div></div>
           </div>
         </div>
         <div className="panel panel-pad">
