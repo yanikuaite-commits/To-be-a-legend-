@@ -14,3 +14,13 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <App />
   </React.StrictMode>,
 );
+
+// Only in the built app: the dev server serves unbundled modules that the
+// cache-first strategy would pin in place.
+if (import.meta.env.PROD && "serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {
+      // Offline support is a bonus; the game still runs online.
+    });
+  });
+}
