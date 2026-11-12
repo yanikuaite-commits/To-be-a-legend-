@@ -150,6 +150,41 @@ jobs:
             -keyalg RSA -keysize 2048 -validity 10000 \
             -dname "CN=Android Debug,O=Android,C=US"
 
+      - name: Prepare release signing key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [ -n "${KEYSTORE_BASE64}" ]; then
+            echo "Usar o keystore de release dos secrets."
+            printf '%s' "${KEYSTORE_BASE64}" | base64 -d > "$HOME/release.keystore"
+            {
+              echo "GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$HOME/release.keystore"
+              echo "GODOT_ANDROID_KEYSTORE_RELEASE_USER=${KEY_ALIAS:-release}"
+              echo "GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=${KEY_PASSWORD:-$KEYSTORE_PASSWORD}"
+            } >> "$GITHUB_ENV"
+          else
+            # Fallback: sem um keystore persistente, assina com um keystore
+            # efemero. O APK instala, mas a assinatura muda em cada release, por
+            # isso as atualizações exigem desinstalar primeiro. Para uma
+            # identidade estavel, definir ANDROID_KEYSTORE_BASE64 e as
+            # passwords correspondentes nos secrets do repositório.
+            echo "::warning::Sem ANDROID_KEYSTORE_BASE64: a assinar o APK de release com um keystore efemero. Adiciona os secrets para uma assinatura estavel."
+            keytool -genkeypair -v \
+              -keystore "$HOME/release.keystore" \
+              -storepass releasepass -alias release -keypass releasepass \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -dname "CN=To Be a Legend,O=TBAL,C=PT"
+            {
+              echo "GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$HOME/release.keystore"
+              echo "GODOT_ANDROID_KEYSTORE_RELEASE_USER=release"
+              echo "GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=releasepass"
+            } >> "$GITHUB_ENV"
+          fi
+
       - name: Export Godot builds
         run: |
           set -o pipefail
